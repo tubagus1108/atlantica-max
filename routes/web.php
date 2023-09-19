@@ -20,9 +20,9 @@ Route::prefix('auth')->group(function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::middleware(['auth','web'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
+// Route::middleware(['auth','web'])->group(function () {
+// });
 
 // Route::get('/', function () {
 //     if (Session::get('user')) {

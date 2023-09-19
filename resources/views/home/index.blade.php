@@ -13,17 +13,16 @@
                     <h1 class="nk-title display-3">Atlantica Max Supreme</h1>
                     <div class="nk-gap-2"></div>
 
-                    @auth
+                    @if (session()->has('user'))
                         {{-- <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="{{ route('download') }}"> --}}
                         <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="">
                             <span>Download the game</span>
                         </a>
                     @else
-                        {{-- <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="{{ route('register') }}"> --}}
-                        <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="">
+                        <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="{{ route('register.index') }}">
                             <span>Join Now</span>
                         </a>
-                    @endauth
+                    @endif
 
                     <div class="nk-gap-4"></div>
                 </div>

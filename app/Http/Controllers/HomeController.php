@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        dd(Auth::check());
-        if (Auth::check()) {
+        if ($request->session()->get('user')) {
             return view('home.index');
         } else {
             return redirect()->route('login.index');

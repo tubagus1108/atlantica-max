@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function indexRegister()
+    public function indexRegister(Request $request)
     {
+        if($request->session()->get('user')){
+            return redirect(route('home.index'));
+        }
         return view('auth.register');
     }
 
@@ -61,9 +64,9 @@ class AuthController extends Controller
         }
     }
 
-    public function indexLogin()
+    public function indexLogin(Request $request)
     {
-        if (Session::get('user')) {
+        if ($request->session()->get('user')) {
             return redirect(route('home.index'));
         }
         return view('auth.login');
@@ -89,6 +92,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($data)) {
             $user = Auth::user();
+        
             session()->put('user', $user);
             return redirect(route('home.index'));
         } else {

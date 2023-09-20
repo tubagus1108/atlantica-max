@@ -63,6 +63,9 @@
 
 		<!-- Google reCAPTCHA -->
 		{{-- <script src="../www.google.com/recaptcha/api.js" async defer></script> --}}
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+
+		@yield('css')
 	</head>
 
 	<body>
@@ -168,7 +171,7 @@
 								<a href="#"><span class="fa fa-bar-chart"></span> Ranking</a>
 								<ul class="dropdown">
 									<li class="{{ Request::is('ranking/characters') ? 'active' : '' }}">
-										<a href="{{ url('ranking/characters') }}">Users</a>
+										<a href="{{route('characters')}}">Users</a>
 									</li>
 									<li class="{{ Request::is('ranking/guilds') ? 'active' : '' }}">
 										<a href="{{ url('ranking/guilds') }}">Guilds</a>

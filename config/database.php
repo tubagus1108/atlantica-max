@@ -116,6 +116,18 @@ return [
             'collation' => 'utf8_unicode_ci',
             'trust_server_certificate' => true,
         ],
+
+        'community' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_AT_AT_Community', '127.0.0.1'),
+            'port' => env('DB_PORT_AT_AT_Community', '1433'),
+            'database' => env('DB_DATABASE_AT_Community', 'AT_Community'),
+            'username' => env('DB_USERNAME_AT_Community', 'your_sql_server_username'),
+            'password' => env('DB_PASSWORD_AT_Community', 'your_sql_server_password'),
+            'charset'  => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'trust_server_certificate' => true,
+        ],
     ],
 
     /*

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RankingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::prefix('user')->group(function(){
     Route::get('information',[UserController::class,'information'])->name('user.information');
 }); 
+
+Route::prefix('ranking')->group(function(){
+    Route::get('characters',[RankingController::class,'getCharacters'])->name('characters');
+    Route::get('characters/detail/{id}',[RankingController::class,'getCharactersDetail'])->name('characters.detail');
+    Route::get('characters/datatable',[RankingController::class,'getCharactersDatatable'])->name('characters.datatable');
+});
 // Route::middleware(['auth','web'])->group(function () {
 // });
 

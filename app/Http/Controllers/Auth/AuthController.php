@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,8 @@ class AuthController extends Controller
             'passwd' => md5($request->input('password')),
             'user_birthday' => $birthday,
             'user_gender' => $gender,
+            'reg_date' => Carbon::now(),
+            'reg_ip' => $request->ip(),
             // Add other columns as needed
         ]);
 
@@ -92,7 +95,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($data)) {
             $user = Auth::user();
-        
+            DB::connection('member')->table('dbo.GM_MEMBER')
+                ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
+                ->update([
+                    'login_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
+                    'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
+                ]);
+            
             session()->put('user', $user);
             return redirect(route('home.index'));
         } else {
@@ -100,11 +109,19 @@ class AuthController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $user = $request->session()->get('user');
+        // dd($user['user_id']);
+        DB::connection('member')->table('dbo.GM_MEMBER')
+            ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
+            ->update([
+                'out_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
+                'out_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
+        ]);
         Session::flush();
         Session::forget('user');
-        Auth::logout();
+
         return redirect(route('login.index'));
     }
 }

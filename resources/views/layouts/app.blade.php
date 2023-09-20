@@ -191,7 +191,7 @@
 								<a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span> {{ session('user')->user_id }} &nbsp;&nbsp;<span class="fa fa-money-bill-alt fa-w-20"></span> {{ number_format(session('user')->cash, 0, ',', ' ') }}</a>
 								<ul class="dropdown">
 									<li class="{{ Request::is('profile') ? 'active' : '' }}">
-										<a href="#"><span class="fa fa-user fa-w-14"></span> My Account</a>
+										<a href="{{route('user.information')}}"><span class="fa fa-user fa-w-14"></span> My Account</a>
 									</li>
 									<li class="{{ Request::is('createperson') ? 'active' : '' }}">
 										<a href="{{ url('createperson') }}"><span class=""></span> Create Character</a>

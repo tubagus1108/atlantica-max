@@ -16,7 +16,7 @@
     <div class="nk-header-table">
         <div class="nk-header-table-cell">
             <div class="container">
-                <h1 class="nk-title">Ranking - Top Users</h1>
+                <h1 class="nk-title">Ranking - Top Clanes</h1>
             </div>
         </div>
     </div>
@@ -34,9 +34,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Character / Guild</th>
+                                <th>Clan</th>
                                 <th>Level</th>
-                                <th>Job</th>
                                 <th>EXP</th>
                             </tr>
                         </thead>
@@ -58,13 +57,12 @@
             // Inisialisasi DataTable
             $('#character-table').DataTable({
                 ajax: {
-                    url :'{{route('characters.datatable')}}',
+                    url :'{{route('guilds.datatable')}}',
                 },
                 "columns": [
                     { "data": "DT_RowIndex", name: 'DT_RowIndex', orderable: false, searchable: false },
                     { "data": "name" },
                     { "data": "level" },
-                    { "data": "job" },
                     { "data": "experience" }
                 ],
                 "searching": false, // Menghilangkan opsi pencarian

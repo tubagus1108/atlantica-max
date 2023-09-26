@@ -103,9 +103,9 @@
 			data-video-start-time="0"
 			data-video-end-time="0"
 			data-video-pause-on-page-leave="true"
-			style="background-image: url('assets/images/page-background.jpg');">
+			style="background-image: url('{{ asset('assets/images/page-background.jpg') }}');">
 		</div>
-		
+
 		<!-- Audio Background -->
 		<div
 			class="nk-page-background-audio d-none"
@@ -174,7 +174,7 @@
 										<a href="{{route('characters')}}">Users</a>
 									</li>
 									<li class="{{ Request::is('ranking/guilds') ? 'active' : '' }}">
-										<a href="{{ url('ranking/guilds') }}">Guilds</a>
+										<a href="{{route('guilds')}}">Guilds</a>
 									</li>
 								</ul>
 							</li>

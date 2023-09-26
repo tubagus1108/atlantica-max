@@ -32,6 +32,10 @@ Route::prefix('ranking')->group(function(){
     Route::get('characters',[RankingController::class,'getCharacters'])->name('characters');
     Route::get('characters/detail/{id}',[RankingController::class,'getCharactersDetail'])->name('characters.detail');
     Route::get('characters/datatable',[RankingController::class,'getCharactersDatatable'])->name('characters.datatable');
+
+    Route::get('guilds',[RankingController::class,'getGuilds'])->name('guilds');
+    Route::get('guilds/detail/{id}',[RankingController::class,'getGuildsDetail'])->name('guilds.detail');
+    Route::get('guilds/datatable',[RankingController::class,'getGuildsDatatable'])->name('guilds.datatable');
 });
 // Route::middleware(['auth','web'])->group(function () {
 // });

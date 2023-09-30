@@ -13,7 +13,7 @@ class HomeController extends Controller
         if ($request->session()->get('user')) {
             return view('home.index');
         } else {
-            return redirect()->route('login.index');
+            return view('home.index');
         }
     }
 }

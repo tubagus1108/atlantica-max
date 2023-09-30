@@ -45,7 +45,7 @@
 						</div>
 						<div class="nk-social-friends-content">
 							<div class="nk-social-friends-info">
-                                <div class="nk-social-friends-name">Guild <a class="text-warning link-effect-1" href="/ranking/guild/10">{{$data[0]->guild_name}}</a></div>
+                                <div class="nk-social-friends-name">Guild <a class="text-warning link-effect-1" href="{{route('guilds.detail',[$data[0]->id_guild])}}">{{$data[0]->guild_name}}</a></div>
 								<div class="nk-social-friends-name">Level&nbsp;<span class="nk-social-friends-meta">{{$data[0]->level}}</span></div>
 								<div class="nk-social-friends-name">EXP&nbsp;<span class="nk-social-friends-meta">{{ number_format($data[0]->experience) }}</span></div>
 								<div class="nk-social-friends-name">Life&nbsp;<span class="nk-social-friends-meta">{{ number_format($data[0]->life) }}</span></div>

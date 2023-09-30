@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetPasswordEmail;
 use App\Models\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +17,7 @@ class AuthController extends Controller
 {
     public function indexRegister(Request $request)
     {
-        if($request->session()->get('user')){
+        if ($request->session()->get('user')) {
             return redirect(route('home.index'));
         }
         return view('auth.register');
@@ -101,7 +103,7 @@ class AuthController extends Controller
                     'login_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
                     'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
                 ]);
-            
+
             session()->put('user', $user);
             return redirect(route('home.index'));
         } else {
@@ -118,10 +120,56 @@ class AuthController extends Controller
             ->update([
                 'out_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
                 'out_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
-        ]);
+            ]);
         Session::flush();
         Session::forget('user');
 
         return redirect(route('login.index'));
+    }
+    public function showResetForm(Request $request)
+    {
+        // Ambil user_id dari sesi
+        $user_id = $request->session()->get('user')->user_id;
+
+        // Lakukan query ke database untuk mendapatkan email berdasarkan user_id
+        $user = DB::table('GM_MEMBER')->where('user_id', $user_id)->first();
+
+        // Jika user tidak ditemukan, redirect atau tampilkan pesan kesalahan
+        if (!$user) {
+            // Tambahkan log atau tampilkan pesan kesalahan
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
+
+        // Kirim email dengan tautan reset password
+        // Mail::to($user->email)->send(new ResetPasswordEmail($user));
+
+        // Redirect ke halaman reset password
+        return redirect('/reset-password-form')->with('success', 'Tautan reset password telah dikirim ke email Anda.');
+    }
+
+    public function resetPasswordForm()
+    {
+        // Tampilkan halaman form reset password
+        return view('auth.reset-password');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        // Validasi input dari form reset password
+        $request->validate([
+            'new_password' => 'required|min:8',
+            // tambahkan validasi lainnya sesuai kebutuhan
+        ]);
+
+        // Ambil user_id dari sesi
+        $user_id = $request->session()->get('user')->user_id;
+
+        // Lakukan update password berdasarkan user_id
+        DB::table('GM_MEMBER')->where('user_id', $user_id)->update([
+            'password' => bcrypt($request->input('new_password')),
+        ]);
+
+        // Redirect ke halaman login atau tampilkan pesan sukses
+        return redirect('/login')->with('success', 'Password Anda telah direset.');
     }
 }

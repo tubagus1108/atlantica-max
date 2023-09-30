@@ -105,11 +105,16 @@ class RankingController extends Controller
     }
 
     public function getGuildsDetail($id){
-        $data = Guild::select('GuildName AS name', 'GuildLevel AS level', 'GuildExp AS experience','GuildUnique as id_guild','CDate as created_at')
-            ->where('GuildUnique',$id)
-            ->orderBy('GuildExp', 'DESC')
-            ->get();    
-        // dd($data);
+        $data = DB::connection('community')
+            ->table('dbo.tbl_GuildMember')
+            ->where('dbo.tbl_GuildMember.GuildUnique', $id)
+            ->where('dbo.tbl_GuildMember.Rank', 9)
+            ->join('AT_Community.dbo.tbl_GuildInfo', 'AT_Community.dbo.tbl_GuildMember.GuildUnique', '=', 'AT_Community.dbo.tbl_GuildInfo.GuildUnique')
+            ->join('AT_GameDB01.dbo.tbl_Person', 'dbo.tbl_GuildMember.PersonID', '=', 'AT_GameDB01.dbo.tbl_Person.PersonID')
+            ->select('dbo.tbl_GuildMember.*','dbo.tbl_GuildInfo.*', 'AT_GameDB01.dbo.tbl_Person.*')
+            ->get();
+            
+        // return response()->json(['data' => $data[0]]);
         return view('ranking.detail-guild',compact('data'));
     }
 }

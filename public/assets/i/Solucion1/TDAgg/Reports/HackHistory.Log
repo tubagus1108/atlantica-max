@@ -1,0 +1,21 @@
+====== Report Date: 6/6/2023 23:16:15 ======
+exe-class: TscShellContainerClass
+exe-hash: 26f0a68ae4435a4d3501e05a6c336e4882e6d7ac
+exe-name: mstsc.exe
+exe-title: Conexión a Escritorio remoto
+src-shield: HS
+====== END ======
+====== Report Date: 6/12/2023 11:14:47 ======
+exe-class: 00007FFCA4C8E0B8-PAL_SYS_WIN32_TIMER_WNDCLASS
+exe-hash: 26f0a68ae4435a4d3501e05a6c336e4882e6d7ac
+exe-name: mstsc.exe
+exe-title: 134.255.232.196 - Conexión a Escritorio remoto
+src-shield: HS
+====== END ======
+====== Report Date: 7/2/2023 15:40:53 ======
+exe-class: 00007FFEBC7DE0B4-PAL_SYS_WIN32_TIMER_WNDCLASS
+exe-hash: 26f0a68ae4435a4d3501e05a6c336e4882e6d7ac
+exe-name: mstsc.exe
+exe-title: 134.255.232.196 - Conexión a Escritorio remoto
+src-shield: HS
+====== END ======

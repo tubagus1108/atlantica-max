@@ -7,7 +7,7 @@
 	<div class="nk-header-table">
 		<div class="nk-header-table-cell">
 			<div class="container">
-				<h1 class="nk-title">Guild - {{$data[0]->name}}</h1>
+				<h1 class="nk-title">Guild - {{$data[0]->GuildName}}</h1>
 			</div>
 		</div>
 	</div>
@@ -27,10 +27,10 @@
 						</div>
 						<div class="nk-social-friends-content">
 							<div class="nk-social-friends-info">
-                                <div class="nk-social-friends-name">Leader <a class="text-warning link-effect-1" href="/ranking/guild/10"></a></div>
-								<div class="nk-social-friends-name">Level&nbsp;<span class="nk-social-friends-meta">{{$data[0]->level}}</span></div>
-								<div class="nk-social-friends-name">EXP&nbsp;<span class="nk-social-friends-meta">{{ number_format($data[0]->experience) }}</span></div>
-								<div class="nk-social-friends-name">Create Date&nbsp;<span class="nk-social-friends-meta">{{ \Carbon\Carbon::parse($data[0]->created_at)->format('F j, Y, g:i a') }}</span></div>
+                                <div class="nk-social-friends-name">Leader <a class="text-warning link-effect-1" href="{{route('characters.detail',[$data[0]->PersonID])}}">{{$data[0]->Name}}</a></div>
+								<div class="nk-social-friends-name">Level&nbsp;<span class="nk-social-friends-meta">{{$data[0]->GuildLevel}}</span></div>
+								<div class="nk-social-friends-name">EXP&nbsp;<span class="nk-social-friends-meta">{{ number_format($data[0]->GuildExp) }}</span></div>
+								<div class="nk-social-friends-name">Create Date&nbsp;<span class="nk-social-friends-meta">{{ \Carbon\Carbon::parse($data[0]->CDate)->format('F j, Y, g:i a') }}</span></div>
 							</div>
 						</div>
 					</li>

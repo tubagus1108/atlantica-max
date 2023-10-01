@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemMallController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,7 @@ Route::prefix('ranking')->group(function () {
     Route::get('guilds/detail/{id}', [RankingController::class, 'getGuildsDetail'])->name('guilds.detail');
     Route::get('guilds/datatable', [RankingController::class, 'getGuildsDatatable'])->name('guilds.datatable');
 });
+Route::get('item-mall', [ItemMallController::class, 'index'])->name('item-mall');
 // Route::middleware(['auth','web'])->group(function () {
 // });
 

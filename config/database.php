@@ -104,7 +104,7 @@ return [
             'collation' => 'utf8_unicode_ci',
             'trust_server_certificate' => true,
         ],
-    
+
         'game' => [
             'driver' => 'sqlsrv',
             'host' => env('DB_HOST_AT_GameDB01', '127.0.0.1'),
@@ -124,6 +124,18 @@ return [
             'database' => env('DB_DATABASE_AT_Community', 'AT_Community'),
             'username' => env('DB_USERNAME_AT_Community', 'your_sql_server_username'),
             'password' => env('DB_PASSWORD_AT_Community', 'your_sql_server_password'),
+            'charset'  => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'trust_server_certificate' => true,
+        ],
+
+        'atlantica' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_ATLANTICA', '127.0.0.1'),
+            'port' => env('DB_PORT_ATLANTICA', '1433'),
+            'database' => env('DB_DATABASE_ATLANTICA', 'ATLANTICA'),
+            'username' => env('DB_USERNAME_ATLANTICA', 'your_sql_server_username'),
+            'password' => env('DB_PASSWORD_ATLANTICA', 'your_sql_server_password'),
             'charset'  => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'trust_server_certificate' => true,
@@ -160,7 +172,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [

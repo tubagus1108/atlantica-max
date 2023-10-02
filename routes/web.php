@@ -42,7 +42,10 @@ Route::prefix('ranking')->group(function () {
     Route::get('guilds/detail/{id}', [RankingController::class, 'getGuildsDetail'])->name('guilds.detail');
     Route::get('guilds/datatable', [RankingController::class, 'getGuildsDatatable'])->name('guilds.datatable');
 });
-Route::get('item-mall', [ItemMallController::class, 'index'])->name('item-mall');
+Route::prefix('item')->group(function () {
+    Route::get('', [ItemMallController::class, 'index'])->name('item-mall');
+    Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
+});
 // Route::middleware(['auth','web'])->group(function () {
 // });
 

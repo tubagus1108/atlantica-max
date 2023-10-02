@@ -17,7 +17,7 @@
     <title>{{ env('APP_NAME') }}</title>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}">
-
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i,400,400i,700%7cMarcellus+SC"
         rel="stylesheet">
@@ -153,10 +153,10 @@
                     </a>
 
                     <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
-                        <li class="{{ Request::is('home') ? 'active' : '' }}">
-                            <a href="{{ url('') }}"><span class="fa fa-home"></span> Home</a>
+                        <li class="{{ Request::is('home.index') ? 'active' : '' }}">
+                            <a href="{{ route('home.index') }}"><span class="fa fa-home"></span> Home</a>
                         </li>
-                        <li class="{{ Request::is('download') ? 'active' : '' }}">
+                        <li class="{{ Request::is('downloads') ? 'active' : '' }}">
                             <a href="{{ route('downloads') }}"><span class="fa fa-cloud-download"></span>
                                 Downloads</a>
                         </li>
@@ -179,10 +179,11 @@
                                 </li>
                             </ul>
                         </li>
-                        {{-- <li class="{{ Request::is('itemmall/mounts') ? 'active' : '' }}">
-								<a href="{{ url('itemmall/mounts') }}"><span class="fa fa-home"></span> Donations</a>
-							</li> --}}
+
                         @if (session()->has('user'))
+                            <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
+                                <a href="{{ route('item-mall') }}"><span class="fa fa-home"></span>Item Mall</a>
+                            </li>
                             <li class="nk-drop-item">
                                 <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
                                     {{ session('user')->user_id }} &nbsp;&nbsp;<span

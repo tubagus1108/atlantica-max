@@ -1,0 +1,237 @@
+.item-container {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
+    background-color: #1f1f21;
+    border: 7px solid #2b2b2d;
+}
+
+.header-container {
+    position: relative;
+    width: 100%;
+}
+
+.header-cuadro {
+    position: absolute;
+    top: -70px;
+    right: -30px;
+    width: 903px;
+    height: 52px;
+    background-image: url(https://cdn.valofe.com/at/web/us/images/headers/subpage-main.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header-cuadro h2 {
+    font-family: 'Georgia', serif;
+    color: #c0c0c0;
+    font-size: 24px;
+    text-align: center;
+    padding: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+    .header-cuadro {
+        top: -40px;
+        right: -20px;
+        width: 110%;
+        height: 40px;
+    }
+}
+
+.items-list {
+    width: 100%;
+    text-align: center;
+}
+
+.item-box {
+    display: inline-block;
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #18181a;
+    ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 10px;
+}
+
+.item-img img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item-desc h4 a {
+    font-family: "Font Awesome 5 Free", NotoKr, "Helvetica Neue", "Noto Sans SC", "Malgun Gothic", "Apple SD Gothic Neo", "ì• í”Œ SD ì‚°ëŒê³ ë”• Neo", "M PLUS 1p", sans-serif;
+    font-size: 13px;
+    color: #ccc;
+    ;
+    text-decoration: none;
+}
+
+.item-desc h4 a:hover {
+    color: #8859ad;
+}
+
+.sale-price {
+    font-weight: bold;
+    color: #8083fe;
+}
+
+.buy-btn {
+    margin-top: 10px;
+    width: 166px;
+    height: 24px;
+    color: #661c91;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 21px;
+    background: #6e6e6e;
+    background: linear-gradient(top, #aaa 40%, #6e6e6e 90%);
+    background: -moz-linear-gradient(top, #aaa 40%, #6e6e6e 90%);
+    background: -o-linear-gradient(top, #aaa 40%, #6e6e6e 90%);
+    background: -webkit-linear-gradient(top, #aaa 40%, #6e6e6e 90%);
+    background: -ms-linear-gradient(top, #aaa 40%, #6e6e6e 90%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='#6e6e6e');
+    border: 1px solid #000;
+    margin: 0 auto;
+    display: block;
+}
+
+.buy-btn:hover {
+    background: #a6a6a6;
+    color: #661c91;
+    text-decoration: none;
+}
+
+#item-mall-nav-wrap {
+    background-color: #353535;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#item-mall-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+#item-mall-nav li {
+    margin-right: 20px;
+}
+
+#item-mall-nav li a {
+    font-family: "Font Awesome 5 Free", NotoKr, "Helvetica Neue", "Noto Sans SC", "Malgun Gothic", "Apple SD Gothic Neo", "ì• í”Œ SD ì‚°ëŒê³ ë”• Neo", "M PLUS 1p", sans-serif;
+    color: #c0c0c0;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#item-mall-nav li a:hover {
+    background-color: #dd44;
+}
+
+@media (max-width: 768px) {
+    #item-mall-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #item-mall-nav li {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/*--aquilas cague--*/
+body {
+    background-color: rgba(175, 204, 172);
+}
+
+.container-boton {
+    background-color: #FFD700;
+    border: 7px solid #0000FF;
+    position: fixed;
+    z-index: 999;
+    border-radius: 50%;
+    bottom: 250px;
+    right: 1300px;
+    padding: 15px;
+    transition: ease 0.3s;
+    animation: efecto 1.2s infinite;
+
+}
+
+.container-boton:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.boton {
+    width: 80px;
+    transition: ease 1s;
+}
+
+@keyframes efecto {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.85);
+    }
+
+    100% {
+        box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);
+    }
+}
+
+body {
+    background-color: rgba(234, 255, 3);
+}
+
+.container-boton2 {
+    background-color: #FFD700;
+    border: 5px solid #FF1D03;
+    position: fixed;
+    z-index: 999;
+    border-radius: 50%;
+    bottom: 250px;
+    right: 60px;
+    padding: 15px;
+    transition: ease 0.3s;
+    animation: efecto 1.2s infinite;
+
+}
+
+.container-boton2:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+
+.boton {
+    width: 80px;
+    transition: ease 1s;
+}
+
+@keyframes efecto {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.85);
+    }
+
+    100% {
+        box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);
+    }
+}
+
+}

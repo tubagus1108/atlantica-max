@@ -49,9 +49,8 @@ class ItemMallController extends Controller
                         if ($userCash >= $productPrice) {
                             // Start a database transaction
 
-                            // DB::connection('atlantica')->beginTransaction();
+                            DB::connection('atlantica')->beginTransaction();
                             try {
-
                                 // Insert the purchase record
                                 DB::connection('atlantica')->table('dbo.NGM_BUY')->insert([
                                     'product_seq' => $productID,
@@ -68,17 +67,24 @@ class ItemMallController extends Controller
                                     'origin' => 'WEB',
                                 ]);
 
-                                // Update user cash
-                                DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->update(['cash' => $userCash - $productPrice]);
+                                // Calculate the new user cash
+                                $newUserCash = $userCash - $productPrice;
+
+                                // Update user cash in the database
+                                DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->update(['cash' => $newUserCash]);
+
+                                $usernewUpdate = DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->get();
+                                // Update the 'cash' attribute in the user's session
+                                Session::put('user', $usernewUpdate);
 
                                 // Commit the transaction
-                                // DB::commit();
+                                DB::commit();
 
                                 Session::flash('success', 'Purchase successful. Don\'t forget to collect the item in the game.');
                                 return redirect()->route('item-mall');
                             } catch (\Exception $e) {
                                 // Rollback the transaction on error
-                                // DB::rollBack();
+                                DB::rollBack();
                                 Session::flash('error', 'Error while making the purchase.' . $e->getMessage());
                                 error_log('Error in purchase: ' . $e->getMessage(), 3, 'file.log');
                                 return redirect()->route('item-mall');

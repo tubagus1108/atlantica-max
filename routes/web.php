@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+Route::get('locale/{locale}', function ($locale) {
+    \Session::put('locale', $locale);
+    // dd(app()->getLocale());
+    return redirect()->back();
+});
+
 Route::prefix('guide')->group(function () {
     Route::get('eng', [GuideController::class, 'guide_english'])->name('guide.eng');
 });

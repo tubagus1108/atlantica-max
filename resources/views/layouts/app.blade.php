@@ -119,9 +119,9 @@
                 <div class="nk-contacts-left">
                     <div class="nk-navbar">
                         <ul class="nk-nav">
-                            <li><a><span class="fa fa-clock"></span>&nbsp;User Local Time</a></li>
+                            <li><a><span class="fa fa-clock"></span>&nbsp;{{ __('local_time') }}</a></li>
                             <li><a id="servertime">00:00:00</a></li>
-                            <li><a><span class="fa fa-clock"></span>&nbsp;Server Time</a></li>
+                            <li><a><span class="fa fa-clock"></span>&nbsp;{{ __('server_time') }}</a></li>
                             <li><iframe style="padding-top:3px;"
                                     src="https://free.timeanddate.com/clock/i8uieqpf/n34/fs13/fcfff/tct/pct/ftb/th1"
                                     frameborder="0" width="53" height="17" allowtransparency="true"></iframe>
@@ -154,30 +154,40 @@
 
                     <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
                         <li class="{{ Request::is('home.index') ? 'active' : '' }}">
-                            <a href="{{ route('home.index') }}"><span class="fa fa-home"></span> Home</a>
+                            <a href="{{ route('home.index') }}"><span class="fa fa-home"></span>
+                                {{ __('home') }}</a>
                         </li>
                         <li class="{{ Request::is('downloads') ? 'active' : '' }}">
                             <a href="{{ route('downloads') }}"><span class="fa fa-cloud-download"></span>
-                                Downloads</a>
+                                {{ __('downloads') }}</a>
                         </li>
                         <li class="nk-drop-item">
-                            <a href="#"><span class="fa fa-bar-chart"></span> Ranking</a>
+                            <a href="#"><span class="fa fa-bar-chart"></span> {{ __('ranking') }}</a></a>
                             <ul class="dropdown">
                                 <li class="{{ Request::is('ranking/characters') ? 'active' : '' }}">
-                                    <a href="{{ route('characters') }}">Characters</a>
+                                    <a href="{{ route('characters') }}">{{ __('ranking.characters') }}</a>
                                 </li>
                                 <li class="{{ Request::is('ranking/guilds') ? 'active' : '' }}">
-                                    <a href="{{ route('guilds') }}">Guilds</a>
+                                    <a href="{{ route('guilds') }}">{{ __('ranking.guild') }}</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nk-drop-item">
-                            <a href="#"><span class="fa fa-info-circle"></span> Guide</a>
-                            <ul class="dropdown">
-                                <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
-                                    <a href="{{ route('guide.eng') }}">English</a>
-                                </li>
-                            </ul>
+                            <a href="#"><span class="fa fa-info-circle"></span> {{ __('guide') }}</a>
+                            @if (app()->getLocale() == 'en')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="{{ route('guide.eng') }}">English</a>
+                                    </li>
+                                </ul>
+                            @endif
+                            @if (app()->getLocale() == 'es')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="">Spanish</a>
+                                    </li>
+                                </ul>
+                            @endif
                         </li>
 
                         @if (session()->has('user'))
@@ -202,16 +212,41 @@
                             </li>
                         @else
                             <li class="nk-drop-item">
-                                <a href="#"><span class="fa-user-circle"></span> Login | Register</a>
+                                <a href="#"><span class="fa-user-circle"></span> {{ __('login') }} |
+                                    {{ __('register') }}</a>
                                 <ul class="dropdown">
                                     <li class="{{ Request::is('register') ? 'active' : '' }}">
                                         <a href="{{ route('register.index') }}"><span class="fa fa-user-plus"></span>
-                                            Register</a>
+                                            {{ __('register') }}</a>
                                     </li>
                                     <li class="{{ Request::is('login') ? 'active' : '' }}">
                                         <a href="{{ route('login.index') }}"><span class="fa fa-sign-in"></span>
-                                            Login</a>
+                                            {{ __('login') }}</a>
                                     </li>
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'en')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English</a></li>
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'es')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish</a></li>
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
                                 </ul>
                             </li>
                         @endif
@@ -269,12 +304,8 @@
             </div>
             <div class="nk-gap"></div>
 
-            <p>Atlantica Max Supreme &copy; All rights reserved</p>
-            <p>Our goals are explicit. We want to offer you a unique experience and ensure that you enjoy every moment
-                of the game while focusing on sustainability, activity, and efficiency. We guarantee that you will
-                experience the best version of Atlantica. Without delving into details, you will see for yourself.
-                Atlantica Max Supreme® was built by a highly qualified team that has never heard of the impossible. We
-                are here to provide you with the most unique experience like no other!</p>
+            <p>{{ __('footer.one') }}</p>
+            <p>{{ __('footer.two') }}</p>
 
             <div class="nk-gap-2"></div>
 

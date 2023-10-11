@@ -174,11 +174,20 @@
                         </li>
                         <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-info-circle"></span> {{ __('guide') }}</a>
-                            <ul class="dropdown">
-                                <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
-                                    <a href="{{ route('guide.eng') }}">English</a>
-                                </li>
-                            </ul>
+                            @if (app()->getLocale() == 'en')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="{{ route('guide.eng') }}">English</a>
+                                    </li>
+                                </ul>
+                            @endif
+                            @if (app()->getLocale() == 'es')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="">Spanish</a>
+                                    </li>
+                                </ul>
+                            @endif
                         </li>
 
                         @if (session()->has('user'))

@@ -7,7 +7,7 @@
         <div class="nk-header-table">
             <div class="nk-header-table-cell">
                 <div class="container">
-                    <h1 class="nk-title">CLient Downloads</h1>
+                    <h1 class="nk-title">{{ __('dowloads.title') }}</h1>
                 </div>
             </div>
         </div>
@@ -26,9 +26,12 @@
                                 style="background-image: url('assets/images/download/drive.png');"></div>
                             <div class="nk-testimonial-body">
                                 <em>
-                                    Versión: <span class="link-effect-2">4.23.98</span> | Tamaño: <span
-                                        class="link-effect-2">7.95GB</span> | Fecha: <span
-                                        class="link-effect-2">2023-09-09</span>
+                                    {{ __('client.downlods.version.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.version') }}</span> |
+                                    {{ __('client.downlods.size.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.size') }}</span> |
+                                    {{ __('client.downloads.date.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.date') }}</span>
                                 </em>
                             </div>
                             <div class="nk-testimonial-name h4">
@@ -48,9 +51,12 @@
                                 style="background-image: url('assets/images/download/mega.png');"></div>
                             <div class="nk-testimonial-body">
                                 <em>
-                                    Versión: <span class="link-effect-2">4.23.98</span> | Tamaño: <span
-                                        class="link-effect-2">7.95GB</span> | Fecha: <span
-                                        class="link-effect-2">2023-09-09</span>
+                                    {{ __('client.downlods.version.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.version') }}</span> |
+                                    {{ __('client.downlods.size.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.size') }}</span> |
+                                    {{ __('client.downloads.date.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.date') }}</span>
                                 </em>
                             </div>
                             <div class="nk-testimonial-name h4">
@@ -70,9 +76,12 @@
                                 style="background-image: url('assets/images/download/mediafire.png');"></div>
                             <div class="nk-testimonial-body">
                                 <em>
-                                    Versión: <span class="link-effect-2">4.23.98</span> | Tamaño: <span
-                                        class="link-effect-2">7.95GB</span> | Fecha: <span
-                                        class="link-effect-2">2023-09-09</span>
+                                    {{ __('client.downlods.version.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.version') }}</span> |
+                                    {{ __('client.downlods.size.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.size') }}</span> |
+                                    {{ __('client.downloads.date.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.date') }}</span>
                                 </em>
                             </div>
                             <div class="nk-testimonial-name h4">
@@ -96,11 +105,10 @@
         <div class="container text-center">
             <div class="nk-gap-6"></div>
             <div class="nk-gap-2"></div>
-            <h2 class="nk-title h1">Requerimientos del sistema</h2>
+            <h2 class="nk-title h1">{{ __('requirement.title') }}</h2>
             <div class="nk-gap-3"></div>
 
-            <p class="lead">Atlantica Max Supreme solo es compatible con Windows. Actualmente no hay soporte para Mac o
-                Linux.</p>
+            <p class="lead">{{ __('requirement.body') }}</p>
 
             <div class="nk-gap-2"></div>
 

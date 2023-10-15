@@ -191,9 +191,9 @@
                         </li>
 
                         @if (session()->has('user'))
-                            <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
+                            {{-- <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
                                 <a href="{{ route('item-mall') }}"><span class="fa fa-home"></span>Item Mall</a>
-                            </li>
+                            </li> --}}
                             <li class="nk-drop-item">
                                 <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
                                     {{ session('user')->user_id }} &nbsp;&nbsp;<span
@@ -292,6 +292,26 @@
         @yield('content')
     </div>
     <!-- End Content -->
+    {{-- News --}}
+    <div class="container">
+        <div class="nk-gap-6"></div>
+        <div class="nk-gap-2"></div>
+        <div class="nk-blog-list-classic">
+            <div id="content">
+                <div id="page-content"></div>
+            </div>
+            <center><iframe width="1200" height="1" src="../i/d.png" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe></center>
+            <div class="nk-post-text">
+                <center>
+                    @yield('news')
+                </center>
+            </div>
+        </div>
+    </div>
+    {{-- News End --}}
     {{-- Footer --}}
     <footer class="nk-footer nk-footer-parallax nk-footer-parallax-opacity">
         <img class="nk-footer-top-corner" src="{{ asset('assets/images/footer-corner.png') }}" alt="">

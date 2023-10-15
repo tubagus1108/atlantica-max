@@ -53,35 +53,33 @@
 
         <div class="items-list clearfix">
             @foreach ($data as $product)
-                @if ($product->main_category == 1)
-                    <div class="item-box" data-productno="{{ $product->product_seq }}">
-                        <div class="tag sale en"></div>
-                        <div class="item-info">
-                            <div class="item-img">
-                                <a href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">
-                                    {{-- <img src="../assets/images/itemmall/{{ $product->image }}" alt="{{ $product->name }}"> --}}
-                                    <img src="{{ asset('assets/images/itemmall/' . $product->image) }}"
-                                        alt="{{ $product->name }}">
+                <div class="item-box" data-productno="{{ $product->product_seq }}">
+                    <div class="tag sale en"></div>
+                    <div class="item-info">
+                        <div class="item-img">
+                            <a href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">
+                                {{-- <img src="../assets/images/itemmall/{{ $product->image }}" alt="{{ $product->name }}"> --}}
+                                <img src="{{ asset('assets/images/itemmall/' . $product->image) }}"
+                                    alt="{{ $product->name }}">
 
-                                </a>
-                            </div>
-                            <div class="item-desc">
-                                <h4><a
-                                        href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">{{ $product->name }}</a>
-                                </h4>
-                                <p class="sale-price">
-                                    <span class="regular-price"></span><span class="sale">{{ $product->price }}</span>
-                                    D.A
-                                </p>
-                            </div>
+                            </a>
                         </div>
-                        <form action="{{ route('purchase') }}" method="post">@csrf
-                            <input type="hidden" name="product_id" value="{{ $product->product_seq }}">
-                            <input type="hidden" name="product_price" value="{{ $product->price }}">
-                            <button type="submit" class="buy-btn">Buy</button>
-                        </form>
+                        <div class="item-desc">
+                            <h4><a
+                                    href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">{{ $product->name }}</a>
+                            </h4>
+                            <p class="sale-price">
+                                <span class="regular-price"></span><span class="sale">{{ $product->price }}</span>
+                                D.A
+                            </p>
+                        </div>
                     </div>
-                @endif
+                    <form action="{{ route('purchase') }}" method="post">@csrf
+                        <input type="hidden" name="product_id" value="{{ $product->product_seq }}">
+                        <input type="hidden" name="product_price" value="{{ $product->price }}">
+                        <button type="submit" class="buy-btn">Buy</button>
+                    </form>
+                </div>
             @endforeach
         </div>
 

@@ -48,7 +48,7 @@ class AuthController extends Controller
             'user_id' => $request->input('user_id'),
             'f_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'passwd' => md5($request->input('password')),
+            'passwd' => $request->input('password'),
             'user_birthday' => $birthday,
             'user_gender' => $gender,
             'reg_date' => Carbon::now(),
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         $user = [
             'email' => $request->input('email'),
-            'passwd' => md5($request->input('password')),
+            'passwd' => $request->input('password'),
         ];
 
         if (Auth::attempt($user)) {
@@ -92,7 +92,7 @@ class AuthController extends Controller
 
         $data = [
             'user_id' => $request->input('identify'),
-            'passwd' => md5($request->input('password')),
+            'passwd' => $request->input('password'),
         ];
 
         if (Auth::attempt($data)) {

@@ -53,5 +53,16 @@
     "ranking.guild.table.exp": "Exp",
     "ranking.guild.table.detail.created_at": "Create Date",
     "ranking.guild.detail.leader": "Leader",
-    "ranking.guild.title": "Clasificación - Mejores clanes"
+    "ranking.guild.title": "Clasificación - Mejores clanes",
+    "item-mall.consumables": "Consumables",
+    "item-mall.mounts": "Mounts",
+    "item-mall.boxes": "Boxes",
+    "item-mall.decorations": "Decorations",
+    "item-mall.cards": "Cards",
+    "item-mall.outfits": "Outfits",
+    "item-mall.equipment": "Equipment",
+    "item-mall.mercenary_packs": "Mercenary Packs",
+    "item-mall.mercenaries": "Mercenaries",
+    "item-mall.books": "Books",
+    "item-mall.clearance_sale": "Clearance Sale"
 }

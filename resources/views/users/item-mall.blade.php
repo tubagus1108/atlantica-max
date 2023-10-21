@@ -23,23 +23,23 @@
 
         <div id="item-mall-nav-wrap">
             <ul id="item-mall-nav">
-                <li class="add-divider"><a href="{{ url('item/1') }}">Consumables</a></li>
-                <li class="add-divider"><a href="{{ url('item/6') }}">Mounts</a></li>
-                <li class="add-divider"><a href="{{ url('item/10') }}">Boxes</a></li>
-                <li class="add-divider"><a href="{{ url('item/2') }}">Decorations</a></li>
-                <li class="add-divider"><a href="{{ url('item/11') }}">Cards</a></li>
-                <li><a href="{{ url('item/9') }}">Outfits</a></li>
+                <li class="add-divider"><a href="{{ url('item/1') }}">{{ __('item-mall.consumables') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/6') }}">{{ __('item-mall.boxes') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/10') }}">{{ __('item-mall.boxes') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/2') }}">{{ __('item-mall.decorations') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/11') }}">{{ __('item-mall.cards') }}</a></li>
+                <li><a href="{{ url('item/9') }}">{{ __('item-mall.outfits') }}</a></li>
             </ul>
             <ul id="item-mall-nav">
-                <li class="add-divider"><a href="{{ url('item/3') }}">Equipment</a></li>
-                <li class="add-divider"><a href="{{ url('item/7') }}">Mercenary Packs</a></li>
+                <li class="add-divider"><a href="{{ url('item/3') }}">{{ __('item-mall.equipment') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/7') }}">{{ __('item-mall.mercenary_packs') }}</a></li>
                 <li>
                     <div style="visibility: hidden"></div>
                     <div style="visibility: hidden">M</div>
                 </li>
-                <li class="add-divider"><a href="{{ url('item/5') }}">Mercenaries</a></li>
-                <li class="add-divider"><a href="{{ url('item/4') }}">Books</a></li>
-                <li class="add-divider"><a href="{{ url('item/12') }}">Clearance Sale</a></li>
+                <li class="add-divider"><a href="{{ url('item/5') }}">{{ __('item-mall.mercenaries') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/4') }}">{{ __('item-mall.books') }}</a></li>
+                <li class="add-divider"><a href="{{ url('item/12') }}">{{ __('item-mall.clearance_sale') }}</a></li>
             </ul>
         </div>
         <center><img src="{{ asset('assets/i/precioso.png') }}" width="700" height="350" alt=""

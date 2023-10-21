@@ -104,8 +104,17 @@ class AuthController extends Controller
                     'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
                 ]);
 
-            session()->put('user', $user);
-            return redirect(route('home.index'));
+            $check_role = DB::connection('game')->table('dbo.tbl_Account')
+                ->where('id', $user->user_id)
+                ->where('MasterLevel', 130)
+                ->first();
+            if ($check_role) {
+                session()->put('user', $user);
+                return redirect(route('admin.dashboard'));
+            } else {
+                session()->put('user', $user);
+                return redirect(route('home.index'));
+            }
         } else {
             return redirect(route('login.index'))->withErrors(['errors' => 'Incorrect username or password']);
         }
@@ -114,6 +123,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->session()->get('user');
+        if (!$user) {
+            return redirect(route('login.index'));
+        }
         // dd($user['user_id']);
         DB::connection('member')->table('dbo.GM_MEMBER')
             ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai

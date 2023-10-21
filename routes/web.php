@@ -50,7 +50,15 @@ Route::prefix('ranking')->group(function () {
 });
 Route::prefix('item')->group(function () {
     Route::get('', [ItemMallController::class, 'index'])->name('item-mall');
+    Route::get('{category_id}', [ItemMallController::class, 'GetCategoryProduct']);
     Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
+});
+Route::middleware(['admin.check'])->group(function () {
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('dashboard', function () {
+            dd("HALAMAN DASHBOARD");
+        })->name('admin.dashboard');
+    });
 });
 // Route::middleware(['auth','web'])->group(function () {
 // });

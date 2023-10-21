@@ -17,9 +17,12 @@ class AdminCheck
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->session()->get('user');
+        if (!$user) {
+            return redirect(route('home.index'));
+        }
         $check_role = DB::connection('game')->table('dbo.tbl_Account')
             ->where('id', $user->user_id)
-            ->where('MasterLevel', 130)
+            ->where('MasterLevel', 120)
             ->first();
         if ($check_role) {
             return $next($request);

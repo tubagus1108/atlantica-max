@@ -106,11 +106,11 @@ class AuthController extends Controller
 
             $check_role = DB::connection('game')->table('dbo.tbl_Account')
                 ->where('id', $user->user_id)
-                ->where('MasterLevel', 130)
+                ->where('MasterLevel', 120)
                 ->first();
             if ($check_role) {
                 session()->put('user', $user);
-                return redirect(route('admin.dashboard'));
+                return redirect(route('admin.news'));
             } else {
                 session()->put('user', $user);
                 return redirect(route('home.index'));

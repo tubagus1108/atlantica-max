@@ -9,10 +9,24 @@ use Illuminate\Support\Facades\Session;
 
 class ItemMallController extends Controller
 {
-
     public function index()
     {
-        $data = DB::connection('atlantica')->table('dbo.NGM_PRODUCT')->select('product_seq', 'main_category', 'name', 'price', 'image')->get();
+        $data = DB::connection('atlantica')
+            ->table('dbo.NGM_PRODUCT')
+            ->select('product_seq', 'main_category', 'name', 'price', 'image')
+            ->get();
+
+        return view('users.item-mall', compact('data'));
+    }
+
+    public function GetCategoryProduct($id)
+    {
+        $data = DB::connection('atlantica')
+            ->table('dbo.NGM_PRODUCT')
+            ->where('main_category', $id)
+            ->select('product_seq', 'main_category', 'name', 'price', 'image')
+            ->get();
+
         // dd($data);
         return view('users.item-mall', compact('data'));
     }
@@ -20,88 +34,85 @@ class ItemMallController extends Controller
     public function purchase(Request $request)
     {
         if ($request->isMethod('post')) {
-            if (!$request->session()->get('user')) {
+            $user = $request->session()->get('user');
+
+            if (!$user) {
                 Session::flash('error', 'You must log in to make a purchase.');
                 return redirect()->route('item-mall');
             }
 
-            if ($request->session()->get('user')) {
-                $productID = $request->input('product_id', 0);
-                $productPrice = $request->input('product_price', 0);
+            $productID = $request->input('product_id', 0);
+            $productPrice = $request->input('product_price', 0);
+            $username = $user->user_id;
 
-                $username = $request->session()->get('user')->user_id;
-                $currentTimestamp = time(); // This gives you a Unix timestamp
+            // Get user cash from the database
+            $userCash = DB::connection('member')
+                ->table('dbo.GM_MEMBER')
+                ->where('user_id', $username)
+                ->value('cash');
 
-                try {
-                    // Get user cash from the database
-                    $userCash = DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->value('cash');
+            // Get the product price from the database
+            $productPriceFromDB = DB::connection('atlantica')
+                ->table('dbo.ngm_product')
+                ->where('product_seq', $productID)
+                ->value('price');
 
-                    // Get the product price from the database
-                    $productPriceFromDB = DB::connection('atlantica')->table('dbo.ngm_product')->where('product_seq', $productID)->value('price');
+            if (!$productPriceFromDB) {
+                Session::flash('error', 'Error in making the purchase. Data manipulation detected, avoid permanent suspension of your account.');
+                return redirect()->route('item-mall');
+            }
 
-                    if (!$productPriceFromDB) {
-                        Session::flash('error', 'Error in making the purchase. Data manipulation detected, avoid permanent suspension of your account.');
-                        return redirect()->route('item-mall');
-                    }
+            if ($productPriceFromDB === $productPrice) {
+                if ($userCash >= $productPrice) {
+                    // Use a transaction to ensure data consistency
+                    DB::connection('atlantica')->transaction(function ($request) use ($productID, $username, $productPrice, $userCash) {
+                        // Insert the purchase record
+                        DB::connection('atlantica')->insert("EXEC NGM_BUY_INS @product_seq=?, @user_id=?, @get_id=?, @order_count=?, @order_price=?, @money_real=?, @money_bonus=?, @money_event=?, @tx_no=?, @comment=?, @reg_ip=?", [
+                            $productID,
+                            $username,
+                            $username,
+                            1,
+                            $productPrice,
+                            0,
+                            0,
+                            0,
+                            'sale',
+                            'comment',
+                            '127.0.0.1',
+                        ]);
 
-                    // dd($userCash);
-                    if ($productPriceFromDB === $productPrice) {
-                        if ($userCash >= $productPrice) {
-                            // Start a database transaction
+                        $newUserCash = $userCash - $productPrice;
+                        DB::connection('member')
+                            ->table('dbo.GM_MEMBER')
+                            ->where('user_id', $username)
+                            ->update(['cash' => $newUserCash]);
 
-                            DB::connection('atlantica')->beginTransaction();
-                            try {
-                                // Insert the purchase record
-                                DB::connection('atlantica')->table('dbo.NGM_BUY')->insert([
-                                    'product_seq' => $productID,
-                                    'user_id' => $username, // Use the correct column name here
-                                    'get_id' => $username,
-                                    'order_count' => 1,
-                                    'order_price' => $productPrice,
-                                    'money_real' => 0,
-                                    'money_bonus' => 0,
-                                    'money_event' => 0,
-                                    'tx_no' => 'sale',
-                                    'comment' => 'comment',
-                                    'reg_ip' => '127.0.0.1',
-                                    'origin' => 'WEB',
-                                ]);
+                        $usernewUpdate = DB::connection('member')
+                            ->table('dbo.GM_MEMBER')
+                            ->where('user_id', $username)
+                            ->first(); // Use 'first' to retrieve a single record
 
-                                // Calculate the new user cash
-                                $newUserCash = $userCash - $productPrice;
+                        if ($usernewUpdate) {
+                            session()->forget('user');
+                            // Update the 'cash' attribute in the user's session
+                            session()->put('user', $usernewUpdate);
 
-                                // Update user cash in the database
-                                DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->update(['cash' => $newUserCash]);
-
-                                $usernewUpdate = DB::connection('member')->table('dbo.GM_MEMBER')->where('user_id', $username)->get();
-                                // Update the 'cash' attribute in the user's session
-                                Session::put('user', $usernewUpdate);
-
-                                // Commit the transaction
-                                DB::commit();
-
-                                Session::flash('success', 'Purchase successful. Don\'t forget to collect the item in the game.');
-                                return redirect()->route('item-mall');
-                            } catch (\Exception $e) {
-                                // Rollback the transaction on error
-                                DB::rollBack();
-                                Session::flash('error', 'Error while making the purchase.' . $e->getMessage());
-                                error_log('Error in purchase: ' . $e->getMessage(), 3, 'file.log');
-                                return redirect()->route('item-mall');
-                            }
+                            Session::flash('success', 'Purchase successful. Don\'t forget to collect the item in the game.');
                         } else {
-                            Session::flash('error', 'You do not have enough balance to purchase this product.');
-                            return redirect()->route('item-mall');
+                            // Handle the case where the user record is not found
+                            Session::flash('error', 'User not found. Please handle this case accordingly.');
                         }
-                    } else {
-                        Session::flash('error', 'Error in making the purchase. Data manipulation detected, avoid permanent suspension of your account.');
-                        return redirect()->route('item-mall');
-                    }
-                } catch (\PDOException $e) {
-                    Session::flash('error', "Error while making the purchase: " . $e->getMessage());
+                    });
+
                     return redirect()->route('item-mall');
+                } else {
+                    Session::flash('error', 'You do not have enough balance to purchase this product.');
                 }
+            } else {
+                Session::flash('error', 'Error in making the purchase. Data manipulation detected, avoid permanent suspension of your account.');
             }
         }
+
+        return redirect()->route('item-mall');
     }
 }

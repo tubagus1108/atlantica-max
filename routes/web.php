@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemMallController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +21,7 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->back();
 });
 
+Route::get('news', [NewsController::class, 'index']);
 Route::prefix('guide')->group(function () {
     Route::get('eng', [GuideController::class, 'guide_english'])->name('guide.eng');
 });
@@ -50,7 +53,18 @@ Route::prefix('ranking')->group(function () {
 });
 Route::prefix('item')->group(function () {
     Route::get('', [ItemMallController::class, 'index'])->name('item-mall');
+    Route::get('{category_id}', [ItemMallController::class, 'GetCategoryProduct']);
     Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
+});
+Route::middleware(['admin.check'])->group(function () {
+    Route::group(['prefix' => 'admin'], function () {
+        Route::get('news', [AdminController::class, 'newsIndex'])->name('admin.news');
+        Route::post('news/store', [AdminController::class, 'store'])->name('news.store');
+        Route::get('news/datatable', [NewsController::class, 'datatable_news'])->name('datatable.news');
+        Route::get('news/delete/{id}', [NewsController::class, 'deleted'])->name('news.deleted');
+        Route::get('news/edit/{id}', [NewsController::class, 'editForm'])->name('ajax.news-edit');
+        Route::post('news/edit/{id}', [NewsController::class, 'editFormPost'])->name('ajax.news-edit.post');
+    });
 });
 // Route::middleware(['auth','web'])->group(function () {
 // });

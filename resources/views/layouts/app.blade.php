@@ -153,6 +153,30 @@
                     </a>
 
                     <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
+                        @if (app()->getLocale() == 'en')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English</a></li>
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'es')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish</a></li>
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
                         <li class="{{ Request::is('home.index') ? 'active' : '' }}">
                             <a href="{{ route('home.index') }}"><span class="fa fa-home"></span>
                                 {{ __('home') }}</a>
@@ -191,9 +215,10 @@
                         </li>
 
                         @if (session()->has('user'))
-                            {{-- <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
-                                <a href="{{ route('item-mall') }}"><span class="fa fa-home"></span>Item Mall</a>
-                            </li> --}}
+                            <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
+                                <a href="{{ route('item-mall') }}"><span class="fa fa-shopping-cart"></span>Item
+                                    Mall</a>
+                            </li>
                             <li class="nk-drop-item">
                                 <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
                                     {{ session('user')->user_id }} &nbsp;&nbsp;<span
@@ -223,30 +248,6 @@
                                         <a href="{{ route('login.index') }}"><span class="fa fa-sign-in"></span>
                                             {{ __('login') }}</a>
                                     </li>
-                                </ul>
-                            </li>
-                        @endif
-                        @if (app()->getLocale() == 'en')
-                            <li class="nk-drop-item">
-                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
-                                <ul class="dropdown">
-                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
-                                            href="{{ url('locale/en') }}">English</a></li>
-                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
-                                            href="{{ url('locale/es') }}">Spanish </a></li>
-                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
-                                </ul>
-                            </li>
-                        @endif
-                        @if (app()->getLocale() == 'es')
-                            <li class="nk-drop-item">
-                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
-                                <ul class="dropdown">
-                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
-                                            href="{{ url('locale/es') }}">Spanish</a></li>
-                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
-                                            href="{{ url('locale/en') }}">English </a></li>
-                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
                                 </ul>
                             </li>
                         @endif
@@ -293,24 +294,7 @@
     </div>
     <!-- End Content -->
     {{-- News --}}
-    <div class="container">
-        <div class="nk-gap-6"></div>
-        <div class="nk-gap-2"></div>
-        <div class="nk-blog-list-classic">
-            <div id="content">
-                <div id="page-content"></div>
-            </div>
-            <center><iframe width="1200" height="1" src="../i/d.png" title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe></center>
-            <div class="nk-post-text">
-                <center>
-                    @yield('news')
-                </center>
-            </div>
-        </div>
-    </div>
+    @yield('news')
     {{-- News End --}}
     {{-- Footer --}}
     <footer class="nk-footer nk-footer-parallax nk-footer-parallax-opacity">

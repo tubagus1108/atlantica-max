@@ -110,8 +110,9 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="" aria-expanded="false"><i
-                                    class="fa fa-newspaper"></i><span class="hide-menu">News</span></a>
+                        <li class="{{ Request::is('admin.news') ? 'active' : '' }}"> <a class="waves-effect waves-dark"
+                                href="" aria-expanded="false"><i class="fa fa-newspaper"></i><span
+                                    class="hide-menu">News</span></a>
                         </li>
                 </nav>
                 <!-- End Sidebar navigation -->

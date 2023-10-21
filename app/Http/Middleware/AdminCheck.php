@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,10 @@ class AdminCheck
         if (!$user) {
             return redirect(route('home.index'));
         }
-        $check_role = DB::connection('game')->table('dbo.tbl_Account')
-            ->where('id', $user->user_id)
+        $check_role = DB::connection('account')->table('dbo.tbl_Account')
+            ->where('ID', $user->user_id)
+            ->where('MasterLevelValue', 120)
+            ->where('MasterLevelExpireTime', '>=', Carbon::now())
             ->where('MasterLevel', 120)
             ->first();
         if ($check_role) {

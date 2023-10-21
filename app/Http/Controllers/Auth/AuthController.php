@@ -104,8 +104,10 @@ class AuthController extends Controller
                     'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
                 ]);
 
-            $check_role = DB::connection('game')->table('dbo.tbl_Account')
-                ->where('id', $user->user_id)
+            $check_role = DB::connection('account')->table('dbo.tbl_Account')
+                ->where('ID', $user->user_id)
+                ->where('MasterLevelValue', 120)
+                ->where('MasterLevelExpireTime', '>=', Carbon::now())
                 ->where('MasterLevel', 120)
                 ->first();
             if ($check_role) {

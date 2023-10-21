@@ -140,6 +140,19 @@ return [
             'collation' => 'utf8_unicode_ci',
             'trust_server_certificate' => true,
         ],
+
+        'account' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_AT_AccountDB', '127.0.0.1'),
+            'port' => env('DB_PORT_AT_AccountDB', '1433'),
+            'database' => env('DB_DATABASE_AT_AccountDB', 'AT_AccountDB'),
+            'username' => env('DB_USERNAME_AT_AccountDB', 'your_sql_server_username'),
+            'password' => env('DB_PASSWORD_AT_AccountDB', 'your_sql_server_password'),
+            'charset'  => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'trust_server_certificate' => true,
+        ],
+
     ],
 
     /*

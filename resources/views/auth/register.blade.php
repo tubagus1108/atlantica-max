@@ -113,7 +113,7 @@
                         <div class="nk-gap-2"></div>
 
                         <button class="nk-btn nk-btn-color-white link-effect-4 float-right"
-                            type="submit">{{ __('register.form.title') }}</button>
+                            type="submit">{{ __('register.form.button') }}</button>
                     </form>
                 </div>
             </div>

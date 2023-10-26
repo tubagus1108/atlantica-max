@@ -117,6 +117,8 @@ class ProductController extends Controller
         // Validasi form input
         $request->validate([
             'main_category' => 'required',
+            'item_unique' => 'required',
+            'item_num' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
             'start_date' => 'required|date',

@@ -51,6 +51,7 @@
                             <label for="item_num">Item Num :</label>
                             <input type="number" name="item_num" id="item_num" class="form-control">
                         </div>
+
                         <div class="form-group">
                             <label for="start-date">Start Date:</label>
                             <input type="date" id="start_date" name="start_date" class="form-control">
@@ -144,5 +145,30 @@
             //     ]
             // });
         })
+        var itemUniqueInput = document.getElementById("item_unique");
+        var itemNumInput = document.getElementById("item_num");
+        var priceInput = document.getElementById("price");
+
+        // Menambahkan event listener untuk memvalidasi input saat pengguna menginput
+        itemUniqueInput.addEventListener("input", function() {
+            // Menghindari nilai yang kurang dari nol
+            if (itemUniqueInput.value < 0) {
+                itemUniqueInput.value = 0;
+            }
+        });
+
+        itemNumInput.addEventListener("input", function() {
+            // Menghindari nilai yang kurang dari nol
+            if (itemNumInput.value < 0) {
+                itemNumInput.value = 0;
+            }
+        });
+
+        priceInput.addEventListener("input", function() {
+            // Menghindari nilai yang kurang dari nol
+            if (priceInput.value < 0) {
+                priceInput.value = 0;
+            }
+        });
     </script>
 @endsection

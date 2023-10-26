@@ -64,5 +64,6 @@
     "item-mall.mercenary_packs": "Pack Mercenario",
     "item-mall.mercenaries": "Mercenarios",
     "item-mall.books": "Libros",
-    "item-mall.clearance_sale": "Casi Regalados"
+    "item-mall.clearance_sale": "Casi Regalados",
+    "register.form.button": "Registrarse"
 }

@@ -64,5 +64,6 @@
     "item-mall.mercenary_packs": "Mercenary Packs",
     "item-mall.mercenaries": "Mercenaries",
     "item-mall.books": "Books",
-    "item-mall.clearance_sale": "Clearance Sale"
+    "item-mall.clearance_sale": "Clearance Sale",
+    "register.form.button": "Register"
 }

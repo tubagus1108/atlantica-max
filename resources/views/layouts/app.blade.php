@@ -161,6 +161,8 @@
                                             href="{{ url('locale/en') }}">English</a></li>
                                     <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
                                             href="{{ url('locale/es') }}">Spanish </a></li>
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
                                     <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
                                 </ul>
                             </li>
@@ -169,6 +171,22 @@
                             <li class="nk-drop-item">
                                 <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
                                 <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish</a></li>
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English </a></li>
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'ru')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
                                     <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
                                             href="{{ url('locale/es') }}">Spanish</a></li>
                                     <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a

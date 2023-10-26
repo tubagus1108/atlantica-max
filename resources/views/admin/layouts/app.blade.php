@@ -110,10 +110,20 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="{{ Request::is('admin.news') ? 'active' : '' }}"> <a class="waves-effect waves-dark"
-                                href="" aria-expanded="false"><i class="fa fa-newspaper"></i><span
-                                    class="hide-menu">News</span></a>
-                        </li>
+                        <ul>
+                            <li class="{{ request()->is('admin/news*') ? 'active' : '' }}">
+                                <a class="waves-effect waves-dark" href="{{ route('admin.news') }}"
+                                    aria-expanded="false">
+                                    <i class="fa fa-newspaper"></i><span class="hide-menu">News</span>
+                                </a>
+                            </li>
+                            <li class="{{ request()->is('admin/product*') ? 'active' : '' }}">
+                                <a href="{{ route('product.index') }}">
+                                    <i class="fa fa-newspaper"></i><span class="hide-menu">Product</span>
+                                </a>
+                            </li>
+                        </ul>
+
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>

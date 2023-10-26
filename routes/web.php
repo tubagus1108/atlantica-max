@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\GuideController;
@@ -64,6 +65,10 @@ Route::middleware(['admin.check'])->group(function () {
         Route::get('news/delete/{id}', [NewsController::class, 'deleted'])->name('news.deleted');
         Route::get('news/edit/{id}', [NewsController::class, 'editForm'])->name('ajax.news-edit');
         Route::post('news/edit/{id}', [NewsController::class, 'editFormPost'])->name('ajax.news-edit.post');
+
+
+        Route::get('product', [ProductController::class, 'index'])->name('product.index');
+        Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
     });
 });
 // Route::middleware(['auth','web'])->group(function () {

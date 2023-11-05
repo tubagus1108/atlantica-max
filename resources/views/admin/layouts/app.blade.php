@@ -51,7 +51,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ route('admin.news') }}">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -117,11 +117,20 @@
                                     <i class="fa fa-newspaper"></i><span class="hide-menu">News</span>
                                 </a>
                             </li>
-                            <li class="{{ request()->is('admin/product*') ? 'active' : '' }}">
-                                <a href="{{ route('product.index') }}">
-                                    <i class="fa fa-newspaper"></i><span class="hide-menu">Product</span>
-                                </a>
-                            </li>
+                            @if (session('user')->sec_primary == 3 && session('user')->sec_content)
+                                <li class="{{ request()->is('admin/product*') ? 'active' : '' }}">
+                                    <a href="{{ route('product.index') }}">
+                                        <i class="fa fa-newspaper"></i><span class="hide-menu">Product</span>
+                                    </a>
+                                </li>
+
+                                <li class="{{ request()->is('admin/cash*') ? 'active' : '' }}">
+                                    <a href="{{ route('cash.index') }}">
+                                        <i class="fa fa-newspaper"></i><span class="hide-menu">Cash</span>
+                                    </a>
+                                </li>
+                            @endif
+
                         </ul>
 
                 </nav>
@@ -169,7 +178,7 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer">
-                © 2018 Adminwrap by wrappixel.com
+                © 2023 {{ env('APP_NAME') }} by {{ env('APP_DEV') }}
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

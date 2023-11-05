@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CashController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
@@ -67,8 +68,14 @@ Route::middleware(['admin.check'])->group(function () {
         Route::post('news/edit/{id}', [NewsController::class, 'editFormPost'])->name('ajax.news-edit.post');
 
 
-        Route::get('product', [ProductController::class, 'index'])->name('product.index');
-        Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+
+        Route::middleware(['super_admin.check'])->group(function () {
+            Route::get('product', [ProductController::class, 'index'])->name('product.index');
+            Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+
+            Route::get('cash', [CashController::class, 'index'])->name('cash.index');
+            Route::post('cash/store', [CashController::class, 'store'])->name('cash.store');
+        });
     });
 });
 // Route::middleware(['auth','web'])->group(function () {

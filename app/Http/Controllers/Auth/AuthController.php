@@ -106,12 +106,13 @@ class AuthController extends Controller
 
             $check_role = DB::connection('account')->table('dbo.tbl_Account')
                 ->where('ID', $user->user_id)
-                ->where('MasterLevelValue', 120)
+                ->where('MasterLevelValue', '>', 109)
                 ->where('MasterLevelExpireTime', '>=', Carbon::now())
-                ->where('MasterLevel', 120)
+                ->where('MasterLevel', '>', 109)
                 ->first();
             if ($check_role) {
                 session()->put('user', $user);
+                session()->put('MasterLevelValue', $check_role->MasterLevelValue);
                 return redirect(route('admin.news'));
             } else {
                 session()->put('user', $user);
@@ -137,6 +138,7 @@ class AuthController extends Controller
             ]);
         Session::flush();
         Session::forget('user');
+        Session::forget('MasterLevelValue');
 
         return redirect(route('login.index'));
     }

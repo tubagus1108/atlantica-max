@@ -14,10 +14,11 @@
                     <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="lang">Language (EN or ES):</label>
+                            <label for="lang">Language (EN or ES or RU):</label>
                             <select name="lang" id="lang" class="form-control">
                                 <option value="en">EN</option>
                                 <option value="es">ES</option>
+                                <option value="ru">RU</option>
                             </select>
                         </div>
                         <div class="form-group">

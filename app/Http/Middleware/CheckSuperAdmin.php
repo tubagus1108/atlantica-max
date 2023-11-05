@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminCheck
+class CheckSuperAdmin
 {
     /**
      * Handle an incoming request.
@@ -23,14 +23,14 @@ class AdminCheck
         }
         $check_role = DB::connection('account')->table('dbo.tbl_Account')
             ->where('ID', $user->user_id)
-            ->where('MasterLevelValue', '>', 109)
+            ->where('MasterLevelValue', 120)
             ->where('MasterLevelExpireTime', '>=', Carbon::now())
-            ->where('MasterLevel', '>', 109)
+            ->where('MasterLevel', 120)
             ->first();
         if ($check_role) {
             return $next($request);
         } else {
-            return redirect()->route('home.index');
+            return redirect(route('admin.news'));
         }
     }
 }

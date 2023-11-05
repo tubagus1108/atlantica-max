@@ -35,11 +35,14 @@ class AppServiceProvider extends ServiceProvider
                     ->where('user_id', $username)
                     ->first(); // Use 'first' to retrieve a single record
 
+                $account = DB::connection('account')->table('dbo.tbl_Account')
+                    ->where('ID', $user->user_id)
+                    ->first();
                 if ($usernewUpdate) {
                     session()->forget('user');
+                    session()->put('MasterLevelValue', $account->MasterLevelValue);
                     // Update the 'cash' attribute in the user's session
                     session()->put('user', $usernewUpdate);
-                    Log::info("SUCESS UPDATE SESSION");
                 }
             }
 

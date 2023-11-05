@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,15 +21,16 @@ class CheckSuperAdmin
         if (!$user) {
             return redirect(route('home.index'));
         }
-        $check_role = DB::connection('member')->table('dbo.GM_MEMBER')
-            ->where('user_id', $user->user_id)
-            ->where('sec_primary', 3)
-            ->where('sec_content', 3)
+        $check_role = DB::connection('account')->table('dbo.tbl_Account')
+            ->where('ID', $user->user_id)
+            ->where('MasterLevelValue', 120)
+            ->where('MasterLevelExpireTime', '>=', Carbon::now())
+            ->where('MasterLevel', 120)
             ->first();
         if ($check_role) {
             return $next($request);
         } else {
-            return response()->json(['code' => '403', 'message' => 'Forbidden']);
+            return redirect(route('admin.news'));
         }
     }
 }

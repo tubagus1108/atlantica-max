@@ -117,7 +117,7 @@
                                     <i class="fa fa-newspaper"></i><span class="hide-menu">News</span>
                                 </a>
                             </li>
-                            @if (session('user')->sec_primary == 3 && session('user')->sec_content)
+                            @if (session('MasterLevelValue') == '120')
                                 <li class="{{ request()->is('admin/product*') ? 'active' : '' }}">
                                     <a href="{{ route('product.index') }}">
                                         <i class="fa fa-newspaper"></i><span class="hide-menu">Product</span>

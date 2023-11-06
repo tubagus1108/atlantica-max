@@ -84,7 +84,9 @@ class JobHelpers
             case '2319':
                 return asset('assets/imgjob/saw.png');
             case '2320':
-                return asset('assets/imgjob/dual_sword.png');
+                return asset('assets/imgjob/sword.png');
+            case '2323':
+                return asset('assets/imgjob/sword.png');
             default:
                 return '';
         }

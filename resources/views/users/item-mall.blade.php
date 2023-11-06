@@ -58,7 +58,7 @@
                         <div class="tag sale en"></div>
                         <div class="item-info">
                             <div class="item-img">
-                                <a href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">
+                                <a>
                                     <img src="{{ asset('assets/images/itemmall/' . $product->image) }}"
                                         alt="{{ $product->name }}">
                                 </a>

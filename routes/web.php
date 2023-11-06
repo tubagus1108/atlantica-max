@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemMallController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\TroubleshootingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,7 @@ Route::prefix('item')->group(function () {
     Route::get('{category_id}', [ItemMallController::class, 'GetCategoryProduct']);
     Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
 });
+Route::get('troubleshooting', [TroubleshootingController::class, 'index'])->name('troubleshooting');
 Route::middleware(['admin.check'])->group(function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('news', [AdminController::class, 'newsIndex'])->name('admin.news');

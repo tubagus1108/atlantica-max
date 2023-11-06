@@ -152,7 +152,7 @@
                         <img src="{{ asset('assets/images/logo.png') }}" alt="" width="100">
                     </a>
 
-                    <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
+                    {{-- <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
                         @if (app()->getLocale() == 'en')
                             <li class="nk-drop-item">
                                 <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
@@ -232,11 +232,20 @@
                             @endif
                         </li>
 
+                        <li class="nk-drop-item">
+                            <a href="#"><span class="fa fa-book"></span>&nbsp;Help</a>
+                            <ul class="dropdown">
+                                <li class="">
+                                    <a href="/troubleshooting"><span
+                                            class="fa fa-book"></span>&nbsp;Troubleshooting</a>
+                                </li>
+                                <!-- <li class="">
+                                    <a href="#"><span class="fa fa-question"></span>&nbsp;FAQ</a>
+                                </li> -->
+                            </ul>
+                        </li>
+
                         @if (session()->has('user'))
-                            <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
-                                <a href="{{ route('item-mall') }}"><span class="fa fa-shopping-cart"></span>Item
-                                    Mall</a>
-                            </li>
                             <li class="nk-drop-item">
                                 <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
                                     {{ session('user')->user_id }} &nbsp;&nbsp;<span
@@ -247,6 +256,147 @@
                                         <a href="{{ route('user.information') }}"><span
                                                 class="fa fa-user fa-w-14"></span> My Account</a>
                                     </li>
+                                    <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
+                                        <a href="{{ route('item-mall') }}"><span
+                                                class="fa fa-shopping-cart"></span>Item
+                                            Mall</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="{{ route('logout') }}" class="text-danger"><span
+                                                class="ion-log-out"></span> Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa-user-circle"></span> {{ __('login') }} |
+                                    {{ __('register') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('register') ? 'active' : '' }}">
+                                        <a href="{{ route('register.index') }}"><span class="fa fa-user-plus"></span>
+                                            {{ __('register') }}</a>
+                                    </li>
+                                    <li class="{{ Request::is('login') ? 'active' : '' }}">
+                                        <a href="{{ route('login.index') }}"><span class="fa fa-sign-in"></span>
+                                            {{ __('login') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul> --}}
+
+                    <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
+                        @if (app()->getLocale() == 'en')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English</a></li>
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish </a></li>
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'es')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish</a></li>
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English </a></li>
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        @if (app()->getLocale() == 'ru')
+                            <li class="nk-drop-item">
+                                <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
+                                <ul class="dropdown">
+                                    <li class="{{ app()->getLocale() == 'ru' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/ru') }}">Rusia </a></li>
+                                    <li class="{{ app()->getLocale() == 'es' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/es') }}">Spanish</a></li>
+                                    <li class="{{ app()->getLocale() == 'en' ? 'active' : '' }}"><a
+                                            href="{{ url('locale/en') }}">English </a></li>
+                                    <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
+                                </ul>
+                            </li>
+                        @endif
+                        <li class="{{ Request::is('home.index') ? 'active' : '' }}">
+                            <a href="{{ route('home.index') }}"><span class="fa fa-home"></span>
+                                {{ __('home') }}</a>
+                        </li>
+                        <li class="{{ Request::is('downloads') ? 'active' : '' }}">
+                            <a href="{{ route('downloads') }}"><span class="fa fa-cloud-download"></span>
+                                {{ __('downloads') }}</a>
+                        </li>
+                        <li class="nk-drop-item">
+                            <a href="#"><span class="fa fa-bar-chart"></span> {{ __('ranking') }}</a></a>
+                            <ul class="dropdown">
+                                <li class="{{ Request::is('ranking/characters') ? 'active' : '' }}">
+                                    <a href="{{ route('characters') }}">{{ __('ranking.characters') }}</a>
+                                </li>
+                                <li class="{{ Request::is('ranking/guilds') ? 'active' : '' }}">
+                                    <a href="{{ route('guilds') }}">{{ __('ranking.guild') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nk-drop-item">
+                            <a href="#"><span class="fa fa-info-circle"></span> {{ __('guide') }}</a>
+                            @if (app()->getLocale() == 'en')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="{{ route('guide.eng') }}">English</a>
+                                    </li>
+                                </ul>
+                            @endif
+                            @if (app()->getLocale() == 'es')
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('guide/eng') ? 'active' : '' }}">
+                                        <a href="">Spanish</a>
+                                    </li>
+                                </ul>
+                            @endif
+                        </li>
+                        <li class="nk-drop-item">
+                            <a href="#"><span class="fa fa-book"></span>&nbsp;Help</a>
+                            <ul class="dropdown">
+                                <li class="">
+                                    <a href="{{ route('troubleshooting') }}">&nbsp;Troubleshooting</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @if (session()->has('user'))
+                            <li class="nk-drop-item">
+                                <a class="text-success" href="#">
+                                    <span
+                                        class="fa fa-user-o"></span>&nbsp;{{ substr(session('user')->user_id, 0, 6) }}
+                                    &nbsp;&nbsp;
+                                    <span
+                                        class="fa fa-money"></span>&nbsp;{{ number_format(session('user')->cash, 0, ',', ' ') }}
+                                </a>
+                                <ul class="dropdown">
+                                    <li class="{{ Request::is('profile') ? 'active' : '' }}">
+                                        <a href="{{ route('user.information') }}"><span
+                                                class="fa fa-user fa-w-14"></span> My Account</a>
+                                    </li>
+                                    <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
+                                        <a href="{{ route('item-mall') }}"><span
+                                                class="fa fa-shopping-cart"></span>Item
+                                            Mall</a>
+                                    </li>
+                                    @if (session('MasterLevelValue') > '109')
+                                        <li class="{{ Request::is('admin/news') ? 'active' : '' }}">
+                                            <a href="{{ route('admin.news') }}"><span
+                                                    class="fa fa-user fa-w-14"></span>Administration</a>
+                                        </li>
+                                    @endif
                                     <li class="">
                                         <a href="{{ route('logout') }}" class="text-danger"><span
                                                 class="ion-log-out"></span> Logout</a>

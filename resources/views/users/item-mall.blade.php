@@ -64,9 +64,6 @@
                                 </a>
                             </div>
                             <div class="item-desc">
-                                <h4><a
-                                        href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">{{ $product->name }}</a>
-                                </h4>
                                 <p class="sale-price">
                                     <span class="regular-price"></span><span class="sale">{{ $product->price }}</span>
                                     D.A

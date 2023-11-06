@@ -133,9 +133,8 @@
                 <div class="nk-contacts-right">
                     <div class="nk-navbar">
                         <ul class="nk-nav">
-                            <li><a href="https://www.facebook.com/profile.php?id=100091056853238"
-                                    target="_blank"><span class="fab fa-facebook"></span></a></li>
-                            <li><a href="https://discord.gg/TKMC5Rba" target="_blank"><span
+                            <li><a href="" target="_blank"><span class="fab fa-facebook"></span></a></li>
+                            <li><a href="https://discord.gg/D4m8Hn57" target="_blank"><span
                                         class="fab fa-discord"></span></a></li>
                         </ul>
                     </div>

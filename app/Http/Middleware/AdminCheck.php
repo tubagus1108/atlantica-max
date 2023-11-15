@@ -24,7 +24,7 @@ class AdminCheck
         $check_role = DB::connection('account')->table('dbo.tbl_Account')
             ->where('ID', $user->user_id)
             ->where('MasterLevelValue', '>', 109)
-            ->where('MasterLevelExpireTime', '>=', Carbon::now())
+            ->where('MasterLevelExpireTime', '>=', Carbon::now()->format('d/m/Y H:i:s'))
             ->where('MasterLevel', '>', 109)
             ->first();
         if ($check_role) {

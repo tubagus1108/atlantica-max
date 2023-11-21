@@ -1,4 +1,8 @@
 {
+    "reset_password.title": "Restablecer contraseña",
+    "reset_password.password_old": "Contraseña anterior",
+    "reset_password.password_confirm": "Confirmar contraseña",
+    "reset_password.password_new": "Nueva contraseña",
     "register.form.username": "Nombre de usuario",
     "register.form.nickname": "Apodo",
     "register.form.email": "Correo electrónico",

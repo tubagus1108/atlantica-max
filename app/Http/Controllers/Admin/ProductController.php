@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -60,11 +61,12 @@ class ProductController extends Controller
             'title' => $request->input('title'),
             'contents' => $request->input('contents'),
             'old_price' => 0,
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+            'start_date' => Carbon::parse($request->input('start_date'))->format('d/m/Y'),
+            'end_date' => Carbon::parse($request->input('end_date'))->format('d/m/Y'),
             'point' => 0,
         ];
 
+        // dd($inputData);  
         // Jalankan prosedur NGM_PRODUCT_INS
         $productSeq = DB::connection('atlantica')->transaction(function () use ($inputData) {
             $result = DB::connection('atlantica')->table('dbo.NGM_PRODUCT')->insert($inputData);

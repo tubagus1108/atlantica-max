@@ -67,10 +67,10 @@
                                     {{-- <a class="nk-btn btn-block nk-btn-color-dark-1 nk-btn-bg-white" href="/user/purchase">
                                     <span class="fa fa-money"></span>&nbsp;Purchase Cash
                                 </a> --}}
-                                    {{-- <a class="nk-btn btn-block nk-btn-color-dark-1 nk-btn-bg-white"
-                                        href="{{ route('reset-password') }}">
+                                    <a class="nk-btn btn-block nk-btn-color-dark-1 nk-btn-bg-white"
+                                        href="{{ route('reset.password') }}">
                                         <span class="fa fa-key"></span>&nbsp;Reset Password
-                                    </a> --}}
+                                    </a>
                                     <a class="nk-btn btn-block nk-btn-color-white nk-btn-bg-danger"
                                         href="{{ route('logout') }}">
                                         <span class="ion-log-out"></span>&nbsp;Logout

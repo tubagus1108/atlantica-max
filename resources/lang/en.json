@@ -1,4 +1,8 @@
 {
+    "reset_password.title": "Reset Password",
+    "reset_password.password_old": "Password old",
+    "reset_password.password_confirm": "Password confirm",
+    "reset_password.password_new": "Password new",
     "register.form.username": "Username",
     "register.form.nickname": "Nickname",
     "register.form.email": "Email",

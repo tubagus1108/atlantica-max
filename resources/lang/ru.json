@@ -1,4 +1,8 @@
 {
+    "reset_password.title": "Сброс пароля",
+    "reset_password.password_old": "Старый пароль",
+    "reset_password.password_confirm": "Подтвердите пароль",
+    "reset_password.password_new": "Новый пароль",
     "register.form.username": "Имя пользователя",
     "register.form.nickname": "Никнейм",
     "register.form.email": "Электронная почта",

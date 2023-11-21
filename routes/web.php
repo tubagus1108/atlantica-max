@@ -40,7 +40,7 @@ Route::prefix('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::prefix('user')->group(function () {
     Route::get('information', [UserController::class, 'information'])->name('user.information');
-    Route::get('reset-password', [UserController::class, 'showResetForm'])->name('reset-password');
+    Route::get('reset-password', [UserController::class, 'showResetForm'])->name('reset.password');
     Route::post('reset-password', [UserController::class, 'resetPassword'])->name('reset-password.post');
     Route::get('reset-password-form', [UserController::class, 'showResetPasswordForm'])->name('reset-password-form');
 });

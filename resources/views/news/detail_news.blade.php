@@ -4,7 +4,7 @@
             <div class="nk-post-category">
                 <a class="link-effect-1">{{ $item->type }}</a>
             </div>
-            <img src="{{ asset('storage/images/' . $item->image) }}" class="nk-img-stretch" alt="Image">
+            <img src="{{ asset('atlantica-max/public/storage/' . $item->image) }}" class="nk-img-stretch" alt="Image">
         </div>
         <div class="nk-post-content">
             <h2 class="nk-post-title h3">

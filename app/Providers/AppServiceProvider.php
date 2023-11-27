@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 $account = DB::connection('account')->table('dbo.tbl_Account')
                     ->where('ID', $user->user_id)
                     ->first();
-                if ($usernewUpdate) {
+                if ($usernewUpdate && $account) {
                     session()->forget('user');
                     session()->put('MasterLevelValue', $account->MasterLevelValue);
                     // Update the 'cash' attribute in the user's session

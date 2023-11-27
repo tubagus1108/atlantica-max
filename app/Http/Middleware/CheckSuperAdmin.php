@@ -24,7 +24,7 @@ class CheckSuperAdmin
         $check_role = DB::connection('account')->table('dbo.tbl_Account')
             ->where('ID', $user->user_id)
             ->where('MasterLevelValue', 120)
-            ->where('MasterLevelExpireTime', '>=', Carbon::now()->format('d/m/Y H:i:s'))
+            ->where('MasterLevelExpireTime', '>=', Carbon::now())
             ->where('MasterLevel', 120)
             ->first();
         if ($check_role) {

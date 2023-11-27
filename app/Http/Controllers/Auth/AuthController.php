@@ -51,7 +51,7 @@ class AuthController extends Controller
             'passwd' => $request->input('password'),
             'user_birthday' => $birthday,
             'user_gender' => $gender,
-            'reg_date' => Carbon::now()->format('d/m/Y H:i:s'),
+            'reg_date' => Carbon::now(),
             'reg_ip' => $request->ip(),
             // Add other columns as needed
         ]);
@@ -100,14 +100,14 @@ class AuthController extends Controller
             DB::connection('member')->table('dbo.GM_MEMBER')
                 ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
                 ->update([
-                    'login_date' => Carbon::now()->format('d/m/Y H:i:s'), // Mengupdate login_date dengan timestamp saat ini
+                    'login_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
                     'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
                 ]);
 
             $check_role = DB::connection('account')->table('dbo.tbl_Account')
                 ->where('ID', $user->user_id)
                 ->where('MasterLevelValue', '>', 109)
-                ->where('MasterLevelExpireTime', '>=', Carbon::now()->format('d/m/Y H:i:s'))
+                ->where('MasterLevelExpireTime', '>=', Carbon::now())
                 ->where('MasterLevel', '>', 109)
                 ->first();
             if ($check_role) {
@@ -133,7 +133,7 @@ class AuthController extends Controller
         DB::connection('member')->table('dbo.GM_MEMBER')
             ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
             ->update([
-                'out_date' => Carbon::now()->format('d/m/Y H:i:s'), // Mengupdate login_date dengan timestamp saat ini
+                'out_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
                 'out_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
             ]);
         Session::flush();

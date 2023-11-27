@@ -390,6 +390,10 @@
                                                 class="fa fa-shopping-cart"></span>Item
                                             Mall</a>
                                     </li>
+                                    {{-- <li class="{{ Request::is('person.index') ? 'active' : '' }}">
+                                        <a href="{{ route('person.index') }}"><span
+                                                class="fa fa-user fa-w-14"></span>Create Person</a>
+                                    </li> --}}
                                     @if (session('MasterLevelValue') > '109')
                                         <li class="{{ Request::is('admin/news') ? 'active' : '' }}">
                                             <a href="{{ route('admin.news') }}"><span

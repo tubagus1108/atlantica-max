@@ -9,6 +9,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemMallController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\TroubleshootingController;
 use App\Http\Controllers\UserController;
@@ -38,6 +39,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('person', [PersonController::class, 'index'])->name('person.index');
 Route::prefix('user')->group(function () {
     Route::get('information', [UserController::class, 'information'])->name('user.information');
     Route::get('reset-password', [UserController::class, 'showResetForm'])->name('reset.password');

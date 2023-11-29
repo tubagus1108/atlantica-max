@@ -61,8 +61,8 @@ class ProductController extends Controller
             'title' => $request->input('title'),
             'contents' => $request->input('contents'),
             'old_price' => 0,
-            'start_date' => Carbon::parse($request->input('start_date'))->format('d/m/Y'),
-            'end_date' => Carbon::parse($request->input('end_date'))->format('d/m/Y'),
+            'start_date' => Carbon::parse($request->input('start_date'))->format('Y-m-d'),
+            'end_date' => Carbon::parse($request->input('end_date'))->format('Y-m-d'),
             'point' => 0,
         ];
 

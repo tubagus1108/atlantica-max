@@ -59,7 +59,7 @@
                         <div class="item-info">
                             <div class="item-img">
                                 <a>
-                                    <img src="{{ asset('assets/images/itemmall/' . $product->image) }}"
+                                    <img src="{{ asset('atlantica-max/public/images/itemmall/' . $product->image) }}S"
                                         alt="{{ $product->name }}">
                                 </a>
                             </div>

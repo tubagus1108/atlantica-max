@@ -394,7 +394,7 @@
                                         <a href="{{ route('person.index') }}"><span
                                                 class="fa fa-user fa-w-14"></span>Create Person</a>
                                     </li> --}}
-                                    @if (session('MasterLevelValue') > '109')
+                                    @if (session('MasterLevelValue') > '104')
                                         <li class="{{ Request::is('admin/news') ? 'active' : '' }}">
                                             <a href="{{ route('admin.news') }}"><span
                                                     class="fa fa-user fa-w-14"></span>Administration</a>

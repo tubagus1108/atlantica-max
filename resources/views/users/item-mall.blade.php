@@ -59,7 +59,7 @@
                         <div class="item-info">
                             <div class="item-img">
                                 <a>
-                                    <img src="{{ asset('atlantica-max/public/assets/images/itemmall/' . $product->image) }}S"
+                                    <img src="{{ asset('atlantica-max/public/assets/images/itemmall/' . $product->image) }}"
                                         alt="{{ $product->name }}">
                                 </a>
                             </div>
@@ -82,7 +82,7 @@
                         <div class="item-info">
                             <div class="item-img">
                                 <a href="{{ url('shop/item_mall', ['product_no' => $product->product_seq]) }}">
-                                    <img src="{{ asset('assets/images/itemmall/' . $product->image) }}"
+                                    <img src="{{ asset('atlantica-max/public/assets/images/itemmall/' . $product->image) }}"
                                         alt="{{ $product->name }}">
                                 </a>
                             </div>

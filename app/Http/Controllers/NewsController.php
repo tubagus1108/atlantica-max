@@ -18,7 +18,9 @@ class NewsController extends Controller
             $this->lang = $request->session()->get('locale');
         }
 
-        $data = News::where('lang', $this->lang)->paginate(2); // Paginate by 10 articles per page
+        $data = News::where('lang', $this->lang)
+            ->orderBy('created_at', 'desc') // Sort by created_at column in descending order
+            ->paginate(2); // Paginate by 2 articles per page
         return view('news.detail_news', compact('data'));
     }
 

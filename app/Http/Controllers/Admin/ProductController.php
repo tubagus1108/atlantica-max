@@ -20,13 +20,15 @@ class ProductController extends Controller
     {
         // Validasi form input
         $request->validate([
-            'main_category' => 'required',
-            'item_unique' => 'required',
-            'item_num' => 'required',
+            'itemid' => 'required',
             'name' => 'required',
+            'desc' => 'required',
+            'desc1' => 'required',
+            'desc2' => 'required',
+            'desc3' => 'required',
+            'min_qty' => 'required|min:1',
+            'max_qty' => 'required|max:1000',
             'price' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
         ]);
 
         $imageVar = null;
@@ -38,75 +40,75 @@ class ProductController extends Controller
             $image->move(public_path('assets/images/itemmall'), $imageVar);
         }
 
-        if ($request->hasFile('eximage')) {
-            $eximage = $request->file('eximage');
-            $eximageVar = time() . '_ex.' . $eximage->getClientOriginalExtension();
-            $eximage->move(public_path('assets/images/itemmall'), $eximageVar);
-        }
+        // if ($request->hasFile('eximage')) {
+        //     $eximage = $request->file('eximage');
+        //     $eximageVar = time() . '_ex.' . $eximage->getClientOriginalExtension();
+        //     $eximage->move(public_path('assets/images/itemmall'), $eximageVar);
+        // }
 
         // Persiapkan data input
         $inputData = [
-            'group_seq' => 1,
-            'main_category' => $request->input('main_category'),
-            'sub_category' => 1,
-            'best_flag' => 1,
-            'gift_flag' => 1,
-            'oneday_flag' => 1,
-            'icon_type' => 'S',
+            'itemid' => $request->input('itemid'),
             'name' => $request->input('name'),
+            'desc' => $request->input('desc'),
+            'itemcount' => 99999999,
             'price' => $request->input('price'),
-            'spr_font' => 0,
+            'price_sale' => 0,
+            'category' => 'a',
+            'purchases' => 0,
             'image' => $imageVar,
-            'eximage' => $eximageVar,
-            'title' => $request->input('title'),
-            'contents' => $request->input('contents'),
-            'old_price' => 0,
-            'start_date' => Carbon::parse($request->input('start_date'))->format('Y-m-d'),
-            'end_date' => Carbon::parse($request->input('end_date'))->format('Y-m-d'),
-            'point' => 0,
+            'isbundle' => 0,
+            'forsale' => 1,
+            'desc1' => $request->input('desc1'),
+            'desc2' => $request->input('desc2'),
+            'desc3' => $request->input('desc3'),
+            'min_qty' =>  $request->input('min_qty'),
+            'max_qty' => $request->input('max_qty'),
         ];
 
         // dd($inputData);  
         // Jalankan prosedur NGM_PRODUCT_INS
+        $nextId = DB::connection('atlantica')->table('dbo.A_CASH')->max('id') + 1;
+        $inputData['id'] = $nextId;
         $productSeq = DB::connection('atlantica')->transaction(function () use ($inputData) {
-            $result = DB::connection('atlantica')->table('dbo.NGM_PRODUCT')->insert($inputData);
-
+            $result = DB::connection('atlantica')->table('dbo.A_CASH')->insert($inputData);
+        
             if (!$result) {
-                throw new \Exception('Failed to insert NGM_PRODUCT');
+                throw new \Exception('Failed to insert A_CASH');
             }
-
-            return DB::connection('atlantica')->table('dbo.NGM_PRODUCT')->where('name', $inputData['name'])->first();
+        
+            return DB::connection('atlantica')->table('dbo.A_CASH')->where('id', $inputData['id'])->first();
         });
 
-        // Persiapkan data input untuk NGM_PRODUCT_ITEM_INS
-        $itemData = [
-            'product_seq' => $productSeq->product_seq,
-            'item_unique' => $request->input('item_unique'),
-            'item_num' => $request->input('item_num'),
-            'item_name' => $productSeq->name,
-            'UseDay' => 0,
-        ];
+        // // Persiapkan data input untuk NGM_PRODUCT_ITEM_INS
+        // $itemData = [
+        //     'product_seq' => rand(0,9999),
+        //     'item_unique' => $request->input('itemid'),
+        //     'item_num' => 99999999,
+        //     'item_name' => $productSeq->name,
+        //     'UseDay' => 0,
+        // ];
 
-        // Jalankan prosedur NGM_PRODUCT_ITEM_INS
-        $results_item_product = DB::connection('atlantica')->table('dbo.NGM_PRODUCT_ITEM')->insert($itemData);
+        // // Jalankan prosedur NGM_PRODUCT_ITEM_INS
+        // $results_item_product = DB::connection('atlantica')->table('dbo.NGM_PRODUCT_ITEM')->insert($itemData);
 
-        if (!$results_item_product) {
-            DB::connection('atlantica')->rollback();
-            Session::flash('success', 'Add Product failed.');
-            return redirect(route('product.index'));
-        }
+        // if (!$results_item_product) {
+        //     DB::connection('atlantica')->rollback();
+        //     Session::flash('success', 'Add Product failed.');
+        //     return redirect(route('product.index'));
+        // }
 
-        // Jalankan prosedur NGM_PRODUCT_UPD_STATUS
-        $update_item = DB::connection('atlantica')->insert("EXEC NGM_PRODUCT_UPD_STATUS @product_seq=?, @status=?", [
-            $productSeq->product_seq,
-            'S'
-        ]);
+        // // Jalankan prosedur NGM_PRODUCT_UPD_STATUS
+        // $update_item = DB::connection('atlantica')->insert("EXEC NGM_PRODUCT_UPD_STATUS @product_seq=?, @status=?", [
+        //     $itemData['product_seq'],
+        //     'S'
+        // ]);
 
-        if (!$update_item) {
-            DB::connection('atlantica')->rollback();
-            Session::flash('success', 'Add Product failed.');
-            return redirect(route('product.index'));
-        }
+        // if (!$update_item) {
+        //     DB::connection('atlantica')->rollback();
+        //     Session::flash('success', 'Add Product failed.');
+        //     return redirect(route('product.index'));
+        // }
 
         // Jika semuanya berhasil, commit transaksi
         DB::connection('atlantica')->commit();

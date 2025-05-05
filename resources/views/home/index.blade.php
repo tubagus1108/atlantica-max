@@ -10,7 +10,7 @@
                 <div class="container">
                     {{-- {{session('user')}} --}}
                     <div class="nk-header-text">
-                        <h1 class="nk-title display-3">Atlantica Max Supreme</h1>
+                        <h1 class="nk-title display-3">Atlantica Legacy</h1>
                         <div class="nk-gap-2"></div>
 
                         @if (session()->has('user'))

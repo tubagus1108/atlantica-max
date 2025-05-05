@@ -12,8 +12,8 @@ class ItemMallController extends Controller
     public function index()
     {
         $data = DB::connection('atlantica')
-            ->table('dbo.NGM_PRODUCT')
-            ->select('product_seq', 'main_category', 'name', 'price', 'image')
+            ->table('dbo.A_CASH')
+            ->select('id', 'name', 'price', 'image')
             ->get();
 
         return view('users.item-mall', compact('data'));
@@ -22,9 +22,9 @@ class ItemMallController extends Controller
     public function GetCategoryProduct($id)
     {
         $data = DB::connection('atlantica')
-            ->table('dbo.NGM_PRODUCT')
-            ->where('main_category', $id)
-            ->select('product_seq', 'main_category', 'name', 'price', 'image')
+            ->table('dbo.A_CASH')
+            ->where('id', $id)
+            ->select('id', 'name', 'price', 'image')
             ->get();
 
         // dd($data);
@@ -43,7 +43,7 @@ class ItemMallController extends Controller
 
             $productID = $request->input('product_id', 0);
             $productPrice = $request->input('product_price', 0);
-            $username = $user->user_id;
+            $username = $user->{'ID'};
 
             // Get user cash from the database
             $userCash = DB::connection('member')
@@ -53,8 +53,8 @@ class ItemMallController extends Controller
 
             // Get the product price from the database
             $productPriceFromDB = DB::connection('atlantica')
-                ->table('dbo.ngm_product')
-                ->where('product_seq', $productID)
+                ->table('dbo.A_CASH')
+                ->where('id', $productID)
                 ->value('price');
 
             if (!$productPriceFromDB) {

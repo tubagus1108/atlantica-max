@@ -20,7 +20,7 @@
                     <h4 class="card-title">Product Created</h4>
                     <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="main_category">Category :</label>
                             <select name="main_category" id="main_category" class="form-control">
                                 <option value="1">{{ __('item-mall.consumables') }}</option>
@@ -36,29 +36,56 @@
                                 <option value="11">{{ __('item-mall.cards') }}</option>
                                 <option value="12">{{ __('item-mall.clearance_sale') }}</option>
                             </select>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="itemid">Kode Item :</label>
+                            <input type="number" name="itemid" id="itemid" class="form-control">
                         </div>
+
+
                         <div class="form-group">
                             <label for="name">Name :</label>
                             <input type="text" name="name" id="name" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="item_unique">Item Unique :</label>
-                            <input type="number" name="item_unique" id="item_unique" class="form-control">
+                            <label for="desc">Deskripsi :</label>
+                            <input type="text" name="desc" id="desc" class="form-control">
                         </div>
 
                         <div class="form-group">
-                            <label for="item_num">Item Num :</label>
-                            <input type="number" name="item_num" id="item_num" class="form-control">
+                            <label for="desc1">Deskripsi Isi Product :</label>
+                            <input type="text" name="desc1" id="desc1" class="form-control">
                         </div>
 
+                        <div class="form-group">
+                            <label for="desc2">Deskripsi Isi Product 2 :</label>
+                            <input type="text" name="desc2" id="desc2" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc3">Deskripsi Isi Product 3 :</label>
+                            <input type="text" name="desc3" id="desc3" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min_qty">Min Qty :</label>
+                            <input type="number" name="min_qty" id="min_qty" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="max_qty">Max Qty :</label>
+                            <input type="number" name="max_qty" id="max_qty" class="form-control">
+                        </div>
+<!-- 
                         <div class="form-group">
                             <label for="start-date">Start Date:</label>
                             <input type="date" id="start_date" name="start_date" class="form-control">
 
                             <label for="end-date">End Date:</label>
                             <input type="date" id="end_date" name="end_date" class="form-control">
-                        </div>
+                        </div> -->
 
                         <div class="form-group">
                             <label for="price">Price:</label>
@@ -69,11 +96,12 @@
                             <label for="image">Image:</label>
                             <input type="file" name="image" id="image" class="form-control-file">
                         </div>
-                        <div class="form-group">
+
+                        <!-- <div class="form-group">
                             <label for="eximage">Eximage:</label>
                             <input type="file" name="eximage" id="eximage" class="form-control-file">
-                        </div>
-
+                        </div> -->
+<!-- 
                         <div class="form-group">
                             <label for="title">Title:</label>
                             <input type="text" name="title" id="title" class="form-control">
@@ -82,7 +110,7 @@
                         <div class="form-group">
                             <label for="contents">Contents:</label>
                             <input type="text" name="contents" id="contents" class="form-control">
-                        </div>
+                        </div> -->
 
                         <button type="submit" class="btn btn-primary">Create Product</button>
                     </form>

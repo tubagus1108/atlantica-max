@@ -36,7 +36,7 @@
                             </div>
                             <div class="nk-testimonial-name h4">
                                 <a class="nk-btn nk-btn-lg link-effect-1"
-                                    href="https://drive.google.com/file/d/15Xa6XqROTH1dzWNwZ5kpmq0TvL6IL3Ky/view?usp=sharing"
+                                    href="https://drive.google.com/file/d/1CUAnheIMl3JDxOblVonbjEoSKR5kJmhw/view"
                                     target="_blank">
                                     <span>Google Drive</span>
                                 </a>
@@ -45,6 +45,31 @@
                     </div>
                 </div>
                 <div>
+                    <div>
+                        <blockquote class="nk-testimonial-2">
+                            <div class="nk-testimonial-photo"
+                                style="background-image: url('assets/images/download/drive.png');"></div>
+                            <div class="nk-testimonial-body">
+                                <em>
+                                    {{ __('client.downlods.version.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.version') }}</span> |
+                                    {{ __('client.downlods.size.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.size') }}</span> |
+                                    {{ __('client.downloads.date.title') }} <span
+                                        class="link-effect-2">{{ __('client.downloads.date') }}</span>
+                                </em>
+                            </div>
+                            <div class="nk-testimonial-name h4">
+                                <a class="nk-btn nk-btn-lg link-effect-1"
+                                    href="https://drive.google.com/file/d/1E69tr_5w_XThzGFxesn5jFef-EEQVGFa/view"
+                                    target="_blank">
+                                    <span>Google Drive Win 11</span>
+                                </a>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+                <!-- <div>
                     <div>
                         <blockquote class="nk-testimonial-2">
                             <div class="nk-testimonial-photo"
@@ -68,8 +93,8 @@
                             </div>
                         </blockquote>
                     </div>
-                </div>
-                <div>
+                </div> -->
+                <!-- <div>
                     <div>
                         <blockquote class="nk-testimonial-2">
                             <div class="nk-testimonial-photo"
@@ -93,7 +118,7 @@
                             </div>
                         </blockquote>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="nk-gap-2"></div>

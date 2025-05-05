@@ -20,5 +20,5 @@ class Member extends Model
         return $this->passwd; // Gunakan 'passwd' sesuai dengan nama kolom yang benar
     }
     
-
+    
 }

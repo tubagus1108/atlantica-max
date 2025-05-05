@@ -83,8 +83,8 @@
 
         <div class="nk-preloader-content">
             <div>
-                <img class="nk-img" src="{{ asset('assets/images/logo.png') }}" alt="Atlantica Max Supreme"
-                    width="170">
+                <img class="nk-img" src="{{ asset('assets/images/logo.png') }}" alt="Atlantica Legacy"
+                    width="120">
                 <div class="nk-preloader-animation"></div>
             </div>
         </div>
@@ -148,7 +148,7 @@
                 <div class="nk-nav-table">
 
                     <a href="#" class="nk-nav-logo">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="" width="100">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="" width="60">
                     </a>
 
                     {{-- <ul class="nk-nav nk-nav-right d-none d-lg-block" data-nav-mobile="#nk-nav-mobile">
@@ -213,7 +213,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nk-drop-item">
+                        <!-- <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-info-circle"></span> {{ __('guide') }}</a>
                             @if (app()->getLocale() == 'en')
                                 <ul class="dropdown">
@@ -229,7 +229,7 @@
                                     </li>
                                 </ul>
                             @endif
-                        </li>
+                        </li> -->
 
                         <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-book"></span>&nbsp;Help</a>
@@ -299,7 +299,7 @@
                                 </ul>
                             </li>
                         @endif
-                        @if (app()->getLocale() == 'es')
+                        <!-- @if (app()->getLocale() == 'es')
                             <li class="nk-drop-item">
                                 <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
                                 <ul class="dropdown">
@@ -312,7 +312,7 @@
                                     <!-- Tambahkan pilihan bahasa lain di sini jika diperlukan -->
                                 </ul>
                             </li>
-                        @endif
+                        @endif -->
                         @if (app()->getLocale() == 'ru')
                             <li class="nk-drop-item">
                                 <a href="#"><span class="fa fa-globe"></span> {{ __('language') }}</a>
@@ -346,7 +346,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nk-drop-item">
+                        <!-- <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-info-circle"></span> {{ __('guide') }}</a>
                             @if (app()->getLocale() == 'en')
                                 <ul class="dropdown">
@@ -362,7 +362,7 @@
                                     </li>
                                 </ul>
                             @endif
-                        </li>
+                        </li> -->
                         <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-book"></span>&nbsp;Help</a>
                             <ul class="dropdown">

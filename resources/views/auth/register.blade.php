@@ -28,6 +28,35 @@
                             </div>
                         </div>
                     @endif
+                    {{-- Error Validasi --}}
+                    @if ($errors->any())
+                        <div class="col-md-12">
+                            <div class="nk-info-box bg-main-1">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- Error Umum (bukan validasi, misalnya login gagal) --}}
+                    @if ($errors->has('errors'))
+                    <div class="col-md-12">
+                        <div class="nk-info-box bg-main-1">
+                            {{ $errors->first('errors') }}
+                        </div>
+                    </div>
+                    @endif
+
+                    @if (session('success'))
+                    <div class="col-md-12">
+                        <div class="nk-info-box bg-main-1">
+                        {{ session('success') }}
+                        </div>
+                    </div>
+                    @endif
                     <form class="nk-form nk-form-style-1" method="POST" action="{{ route('register.post') }}">@csrf
                         <div class="row vertical-gap">
                             <div class="col-sm-6">

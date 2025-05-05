@@ -34,20 +34,16 @@ class AppServiceProvider extends ServiceProvider
             // Access the user from the session
             if (Session::has('user')) {
                 $user = Session::get('user');
-                $username = $user->ID;
-                $usernewUpdate = DB::connection('member')
-                    ->table('dbo.GM_MEMBER')
-                    ->where('user_id', $username)
-                    ->first(); // Use 'first' to retrieve a single record
+                $username = $user->{'ID'};
 
                 $account = DB::connection('account')->table('dbo.tbl_Account')
-                    ->where('ID', $user->{'ID'})
+                    ->where('ID', $username)
                     ->first();
-                if ($usernewUpdate && $account) {
+
+                if ($account) {
                     session()->forget('user');
-                    session()->put('MasterLevelValue', $account->MasterLevelValue);
                     // Update the 'cash' attribute in the user's session
-                    session()->put('user', $usernewUpdate);
+                    session()->put('user', $account);
                 }
             }
 

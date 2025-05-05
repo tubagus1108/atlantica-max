@@ -122,4 +122,55 @@ class RankingController extends Controller
         // return response()->json(['data' => $data[0]]);
         return view('ranking.detail-guild', compact('data'));
     }
+
+    public function getPvP()
+    {
+        return view('ranking.pvp');
+    }
+
+    public function getPvpDatatable()
+    {
+        $query = DB::connection('game')
+            ->table(DB::raw('[AT_GameDB01].[dbo].[tbl_Tournament] as t'))
+            ->join(DB::raw('[AT_GameDB01].[dbo].[tbl_Person] as p'), 't.PersonID', '=', 'p.PersonID')
+            ->select([
+                't.Win',
+                't.Lose',
+                't.Victory',
+                'p.Name',
+                't.PersonID'
+            ])
+            ->where('t.Type', 9);
+
+        return DataTables::of($query)
+            ->addColumn('name', fn($data) => e($data->Name))
+            ->addColumn('win', fn($data) => number_format($data->Win))
+            ->addColumn('lose', fn($data) => number_format($data->Lose))
+            ->addColumn('victory', fn($data) => number_format($data->Victory))
+            ->order(function ($query) {
+                $query->orderBy('t.Win', 'desc'); // ini baru aman untuk SQL Server
+            })
+            ->make(true);
+    }
+
+    public function getTopSpenders()
+    {
+        $sqlSpenders = "
+            SELECT TOP 5
+                r.user_id, 
+                a.LastCharName, 
+                SUM(r.cash_amount) AS total_cash
+            FROM AT_AccountDB.dbo.redeem_log r
+            JOIN AT_AccountDB.dbo.tbl_Account a ON r.user_id = a.ID
+            GROUP BY r.user_id, a.LastCharName
+            ORDER BY total_cash DESC
+        ";
+
+        // Jalankan query pada koneksi yang sesuai, misalnya 'game' jika itu koneksi SQL Server
+        $topSpenders = DB::connection('game')->select($sqlSpenders);
+
+        return view('ranking.top-spenders', compact('topSpenders'));
+    }
+
+
 }

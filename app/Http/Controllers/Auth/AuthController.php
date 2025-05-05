@@ -61,8 +61,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($user)) {
-            session(['user' => Auth::user()]);
-            return redirect(route('home.index'))->with('success', 'Registration successful!');
+            return redirect(route('login.index'))->with('success', 'Registration successful!');
         } else {
             return redirect(route('login.index'))->withErrors(['errors' => 'Registration errors!']);
         }
@@ -107,48 +106,14 @@ class AuthController extends Controller
                 ->first();
             if ($check_role) {
                 session()->put('user', $checkUser);
-                session()->put('MasterLevelValue', $check_role->MasterLevelValue);
                 return redirect(route('admin.news'));
             } else {
                 session()->put('user', $checkUser);
                 return redirect(route('home.index'));
             }
         }else{
-            return redirect(route('login.index'))->withErrors(['errors' => 'Account Not Found !!']);
+            return redirect(route('login.index'))->withErrors(['errors' => 'Account not found, please login to the game']);
         }
-        // if (Auth::attempt($data)) {
-        //     $user = Auth::user();
-        //     DB::connection('member')->table('dbo.GM_MEMBER')
-        //         ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
-        //         ->update([
-        //             'login_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
-        //             'login_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
-        //         ]);
-
-        //     $check_role = DB::connection('account')->table('dbo.tbl_Account')
-        //         ->where('ID', $user->user_id)
-        //         ->where('MasterLevelValue', '>', 109)
-        //         ->where('MasterLevelExpireTime', '>=', Carbon::now())
-        //         ->where('MasterLevel', '>', 109)
-        //         ->first();
-        //     $cash = DB::connection('account')->table('dbo.tbl_Account')
-        //         ->where('ID', $user->user_id)
-        //         ->value('cash');
-        //     if ($check_role) {
-        //         session()->put('user', $user);
-        //         session()->put('user.cash', $cash);
-        //         session()->put('MasterLevelValue', $check_role->MasterLevelValue);
-        //         dd($user);
-        //         return redirect(route('admin.news'));
-        //     } else {
-        //         session()->put('user', $user);
-        //         session()->put('user.cash', $cash);
-        //         dd($user);
-        //         return redirect(route('home.index'));
-        //     }
-        // } else {
-        //     return redirect(route('login.index'))->withErrors(['errors' => 'Incorrect username or password']);
-        // }
     }
 
     public function logout(Request $request)
@@ -159,17 +124,17 @@ class AuthController extends Controller
         }
         // dd($user['user_id']);
         DB::connection('member')->table('dbo.GM_MEMBER')
-            ->where('user_id', $user->user_id) // Ganti $userId dengan nilai user_id yang sesuai
+            ->where('user_id', $user->{'ID'}) // Ganti $userId dengan nilai user_id yang sesuai
             ->update([
                 'out_date' => Carbon::now(), // Mengupdate login_date dengan timestamp saat ini
                 'out_ip'   => $request->ip(), // Ganti $userIp dengan alamat IP yang sesuai
             ]);
         Session::flush();
         Session::forget('user');
-        Session::forget('MasterLevelValue');
 
         return redirect(route('login.index'));
     }
+
     public function showResetForm(Request $request)
     {
         // Ambil user_id dari sesi

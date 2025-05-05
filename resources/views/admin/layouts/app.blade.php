@@ -56,7 +56,7 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('assets/images/logo.png') }}" width="100" alt="homepage"
+                            <img src="{{ asset('assets/images/logo.png') }}" width="50" alt="homepage"
                                 class="dark-logo" />
                         </b>
                     </a>
@@ -86,7 +86,7 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
                                     src="assets/images/users/1.jpg" alt="user" class="" /> <span
-                                    class="hidden-md-down">{{ session('user')->user_id }} &nbsp;</span> </a>
+                                    class="hidden-md-down">{{ session('user')->ID }} &nbsp;</span> </a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ route('home.index') }}">Home User</a>
                                 <!-- Tambahkan item Logout di sini -->
@@ -117,7 +117,7 @@
                                     <i class="fa fa-newspaper"></i><span class="hide-menu">News</span>
                                 </a>
                             </li>
-                            @if (session('MasterLevelValue') == '120')
+                            @if (session('user')->MasterLevelValue == '120')
                                 <li class="{{ request()->is('admin/product*') ? 'active' : '' }}">
                                     <a href="{{ route('product.index') }}">
                                         <i class="fa fa-newspaper"></i><span class="hide-menu">Product</span>

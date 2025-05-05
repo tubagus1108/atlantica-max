@@ -21,14 +21,22 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <div class="nk-box-3 bg-dark-1">
+
+                    {{-- Error Umum (bukan validasi, misalnya login gagal) --}}
                     @if ($errors->has('errors'))
-                        <div class="col-md-12">
-                            <div class="nk-info-box bg-main-1">
-                                <ul>
-                                    <li>{{ $errors->first('errors') }}</li>
-                                </ul>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="nk-info-box bg-main-1">
+                            {{ $errors->first('errors') }}
                         </div>
+                    </div>
+                    @endif
+
+                    @if (session('success'))
+                    <div class="col-md-12">
+                        <div class="nk-info-box bg-main-1">
+                        {{ session('success') }}
+                        </div>
+                    </div>
                     @endif
                     <form class="nk-form nk-form-style-1" method="POST" action="{{ route('login.post') }}">
                         @csrf

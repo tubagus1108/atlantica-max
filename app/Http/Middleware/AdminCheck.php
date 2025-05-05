@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Session;
 
 class AdminCheck
 {
@@ -17,7 +18,8 @@ class AdminCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = $request->session()->get('user');
+        $user = Session::get('user');
+
         if (!$user) {
             return redirect(route('home.index'));
         }
@@ -27,6 +29,7 @@ class AdminCheck
             ->where('MasterLevelExpireTime', '>=', Carbon::now())
             ->where('MasterLevel', '>', 104)
             ->first();
+
         if ($check_role) {
             return $next($request);
         } else {

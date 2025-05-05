@@ -55,6 +55,12 @@ Route::prefix('ranking')->group(function () {
     Route::get('guilds', [RankingController::class, 'getGuilds'])->name('guilds');
     Route::get('guilds/detail/{id}', [RankingController::class, 'getGuildsDetail'])->name('guilds.detail');
     Route::get('guilds/datatable', [RankingController::class, 'getGuildsDatatable'])->name('guilds.datatable');
+
+    Route::get('pvp', [RankingController::class, 'getPvP'])->name('pvp');
+    Route::get('pvp/datatable', [RankingController::class, 'getPvpDatatable'])->name('pvp.datatable');
+
+    Route::get('top-spenders', [RankingController::class, 'getTopSpenders'])->name('top-spenders');
+    Route::get('top-spenders/datatable', [RankingController::class, 'getTopSpendersDatatable'])->name('top-spenders.datatable');
 });
 Route::prefix('item')->group(function () {
     Route::get('', [ItemMallController::class, 'index'])->name('item-mall');

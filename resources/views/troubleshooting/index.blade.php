@@ -68,7 +68,7 @@
                                 <img class="nk-img" src="assets/images/troubleshooting/gameguard/ert.png" alt="">
                                 <div class="nk-gap-1"></div>
                                 <p>- {{ __('solution_1') }}<br>- {{ __('solution_2') }}<br>- {{ __('solution_3') }} <a
-                                        class="link-effect-2" href="https://discord.gg/UtM3WDt8b"
+                                        class="link-effect-2" href="https://discord.gg/aolegacy"
                                         target="_blank">{{ __('solution_3_discord') }}</a>
                                     {{ __('solution_3_discord_clickhere') }}
                                 </p>

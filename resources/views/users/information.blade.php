@@ -30,7 +30,7 @@
                                     class="fa fa-money"></span>&nbsp;{{ number_format(session('user')->cash, 0, ',', ' ') }}
                             </button>
                         </div>
-                        <h1 class="nk-social-profile-info-name">{{ session('user')->f_name }}</h1>
+                        <h1 class="nk-social-profile-info-name">{{ session('user')->LastCharName }}</h1>
                     </div>
                 </div>
             </div>
@@ -49,20 +49,11 @@
                             <div class="nk-social-friends-content">
                                 <div class="nk-social-friends-info" style="width: 100%;">
                                     <div class="nk-social-friends-name">Nickname&nbsp;<span
-                                            class="nk-social-friends-meta">{{ session('user')->f_name }}</span></div>
+                                            class="nk-social-friends-meta">{{ session('user')->LastCharName }}</span></div>
                                     <div class="nk-social-friends-name">Username (Login ID)&nbsp;<span
-                                            class="nk-social-friends-meta">{{ session('user')->user_id }}</span></div>
-                                    <div class="nk-social-friends-name">Email&nbsp;<span
-                                            class="nk-social-friends-meta">{{ session('user')->email }}</span></div>
-                                    <div class="nk-social-friends-name">Gender&nbsp;<span
-                                            class="nk-social-friends-meta">{{ session('user')->user_gender === 'm' ? 'Male' : 'Female' }}</span>
-                                    </div>
-                                    <div class="nk-social-friends-name">Birthday&nbsp;<span
-                                            class="nk-social-friends-meta">{{ \Carbon\Carbon::parse(session('user')->user_birthday)->format('Y-m-d') }}</span>
-                                    </div>
-                                    <div class="nk-social-friends-name">Created Date&nbsp;<span
-                                            class="nk-social-friends-meta">{{ \Carbon\Carbon::parse(session('user')->reg_date)->format('F j, Y, g:i a') }}</span>
-                                    </div>
+                                            class="nk-social-friends-meta">{{ session('user')->ID }}</span></div>
+                                    <!-- <div class="nk-social-friends-name">Email&nbsp;<span
+                                            class="nk-social-friends-meta"></span></div> -->
                                     <div class="nk-gap-3"></div>
                                     {{-- <a class="nk-btn btn-block nk-btn-color-dark-1 nk-btn-bg-white" href="/user/purchase">
                                     <span class="fa fa-money"></span>&nbsp;Purchase Cash

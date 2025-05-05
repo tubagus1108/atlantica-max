@@ -29,7 +29,7 @@
 
         <div class="items-list clearfix">
             @foreach ($data as $product)
-            <div class="item-box product" data-productno="{{ $product->id }}">
+            <div class="item-box product" data-productno="{{ $product->itemid }}">
                 <div class="tag sale en"></div>
                 <div class="item-info">
                     <div class="item-img">
@@ -47,8 +47,15 @@
                     </div>
                 </div>
                 <form action="{{ route('purchase') }}" method="post">@csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="product_id" value="{{ $product->itemid }}">
                     <input type="hidden" name="product_price" value="{{ $product->price }}">
+                    <label for="quantity"></label>
+                    <select name="quantity" id="quantity">
+                        <option value="1">1</option>
+                        <option value="10">10</option>
+                        <option value="100">100</option>
+                        <option value="1000">1000</option>
+                    </select>
                     <button type="submit" class="buy-btn">Buy</button>
                 </form>
             </div>

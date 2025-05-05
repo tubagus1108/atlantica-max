@@ -94,8 +94,8 @@ class AuthController extends Controller
         ];
 
         $checkUser = DB::connection('account')->table('dbo.tbl_Account')
-                ->where('ID', $data['user_id'])
-            ->first();
+                    ->where('ID', $data['user_id'])
+                    ->first();
 
         if($checkUser){
             $check_role = DB::connection('account')->table('dbo.tbl_Account')
@@ -119,6 +119,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->session()->get('user');
+        dd($user);
         if (!$user) {
             return redirect(route('login.index'));
         }

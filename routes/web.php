@@ -13,6 +13,8 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RankingController;
 use App\Http\Controllers\TroubleshootingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OtherFeatureController;
+use App\Http\Controllers\UserInventoryController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -67,6 +69,22 @@ Route::prefix('item')->group(function () {
     Route::get('{category_id}', [ItemMallController::class, 'GetCategoryProduct']);
     Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
 });
+
+Route::prefix('m-cash')->group(function () {
+    Route::get('', [OtherFeatureController::class, 'index'])->name('m-cash');
+    Route::post('/purchase', [ItemMallController::class, 'purchase'])->name('purchase');
+});
+
+Route::prefix('patch-manual')->group(function () {
+    Route::get('', [OtherFeatureController::class, 'patchManual'])->name('patch-manual');
+});
+
+Route::get('/inventory', [UserInventoryController::class, 'index'])->name('user.inventory');
+Route::post('/inventory/sell', [UserInventoryController::class, 'sell'])->name('user.inventory.sell');
+
+Route::get('/redeem', [OtherFeatureController::class, 'redeemIndex'])->name('redeem.index');
+Route::post('/redeem', [OtherFeatureController::class, 'redeem'])->name('redeem.submit');
+
 Route::get('troubleshooting', [TroubleshootingController::class, 'index'])->name('troubleshooting');
 Route::middleware(['admin.check'])->group(function () {
     Route::group(['prefix' => 'admin'], function () {

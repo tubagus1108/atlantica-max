@@ -230,7 +230,7 @@
                                 </ul>
                             @endif
                         </li> -->
-<!-- 
+<!--
                         <li class="nk-drop-item">
                             <a href="#"><span class="fa fa-book"></span>&nbsp;Help</a>
                             <ul class="dropdown">
@@ -270,10 +270,10 @@
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Redeem Code</a>
                                     </li>
-                                    <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
-                                        <a href="{{ route('item-mall') }}"><span
+                                    <!-- <li class="{{ Request::is('m-cash') ? 'active' : '' }}">
+                                        <a href="{{ route('m-cash') }}"><span
                                                 class="fa fa-shopping-cart"></span>M-Cash</a>
-                                    </li>
+                                    </li> -->
                                     <li class="">
                                         <a href="{{ route('logout') }}" class="text-danger"><span
                                                 class="ion-log-out"></span> Logout</a>
@@ -405,25 +405,25 @@
                                         <a href="{{ route('user.information') }}"><span
                                                 class="fa fa-user fa-w-14"></span> My Account</a>
                                     </li>
-                                    <li class="{{ Request::is('profile') ? 'active' : '' }}">
-                                        <a href="{{ route('user.information') }}"><span
+                                    <li class="{{ Request::is('patch-manual') ? 'active' : '' }}">
+                                        <a href="{{ route('patch-manual') }}"><span
                                                 class="fa fa-user fa-w-14"></span> Patch (Manual)</a>
                                     </li>
-                                    <li class="{{ Request::is('profile') ? 'active' : '' }}">
-                                        <a href="{{ route('user.information') }}"><span
+                                    <li class="{{ Request::is('user.inventory') ? 'active' : '' }}">
+                                        <a href="{{ route('user.inventory') }}"><span
                                                 class="fa fa-shopping-cart"></span> Sell Coin</a>
                                     </li>
                                     <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Shop</a>
-                                    <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
-                                        <a href="{{ route('item-mall') }}"><span
+                                    <li class="{{ Request::is('redeem.index') ? 'active' : '' }}">
+                                        <a href="{{ route('redeem.index') }}"><span
                                                 class="fa fa-shopping-cart"></span>Redeem Code</a>
                                     </li>
-                                    <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
-                                        <a href="{{ route('item-mall') }}"><span
+                                    <!-- <li class="{{ Request::is('m-cash') ? 'active' : '' }}">
+                                        <a href="{{ route('m-cash') }}"><span
                                                 class="fa fa-shopping-cart"></span>M-Cash</a>
-                                    </li>
+                                    </li> -->
                                     {{-- <li class="{{ Request::is('person.index') ? 'active' : '' }}">
                                         <a href="{{ route('person.index') }}"><span
                                                 class="fa fa-user fa-w-14"></span>Create Person</a>

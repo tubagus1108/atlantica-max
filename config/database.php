@@ -153,6 +153,18 @@ return [
             'trust_server_certificate' => true,
         ],
 
+        'patch' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST_AT_Patch', '127.0.0.1'),
+            'port' => env('DB_PORT_AT_Patch', '1433'),
+            'database' => env('DB_DATABASE_AT_Patch', 'AT_Patch'),
+            'username' => env('DB_USERNAME_AT_Patch', 'your_sql_server_username'),
+            'password' => env('DB_PASSWORD_AT_Patch', 'your_sql_server_password'),
+            'charset'  => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'trust_server_certificate' => true,
+        ],
+
     ],
 
     /*

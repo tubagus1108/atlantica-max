@@ -73,7 +73,7 @@ class OtherFeatureController extends Controller
             ]);
 
             DB::connection('account')->commit();
-
+            Session::flash('success','Cash berhasil ditambahkan!');
             return back()->withErrors(['success' => 'Cash berhasil ditambahkan!']);
         } catch (\Exception $e) {
             DB::connection('account')->rollBack();

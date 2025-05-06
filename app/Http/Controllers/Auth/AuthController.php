@@ -97,7 +97,7 @@ class AuthController extends Controller
                     ->where('ID', $data['user_id'])
                     ->first();
 
-        if($checkUser){
+        if($checkUser && Auth::attempt($data)){
             $check_role = DB::connection('account')->table('dbo.tbl_Account')
                 ->where('ID', $data['user_id'])
                 ->where('MasterLevelValue', '>', 109)
@@ -119,7 +119,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $user = $request->session()->get('user');
-        dd($user);
+
         if (!$user) {
             return redirect(route('login.index'));
         }

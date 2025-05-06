@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CashController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
 use App\Http\Controllers\GuideController;
@@ -84,6 +85,9 @@ Route::post('/inventory/sell', [UserInventoryController::class, 'sell'])->name('
 
 Route::get('/redeem', [OtherFeatureController::class, 'redeemIndex'])->name('redeem.index');
 Route::post('/redeem', [OtherFeatureController::class, 'redeem'])->name('redeem.submit');
+
+Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+Route::post('/voucher', [VoucherController::class, 'store'])->name('voucher.store');
 
 Route::get('troubleshooting', [TroubleshootingController::class, 'index'])->name('troubleshooting');
 Route::middleware(['admin.check'])->group(function () {

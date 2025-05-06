@@ -12,13 +12,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>{{ env('APP_NAME') }}</title>
     <!-- Bootstrap Core CSS -->
-    <link href="assets/node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('admin/assets/node_modules/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
     <!-- page css -->
-    <link href="css/pages/google-vector-map.css" rel="stylesheet">
+    <link href="{{asset('admin/css/pages/google-vector-map.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="{{asset('admin/css/colors/default.css')}}" id="theme" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -129,6 +129,12 @@
                                         <i class="fa fa-newspaper"></i><span class="hide-menu">Cash</span>
                                     </a>
                                 </li>
+
+                                <li class="{{ request()->is('admin/voucher*') ? 'active' : '' }}">
+                                    <a href="{{ route('voucher.index') }}">
+                                        <i class="fa fa-newspaper"></i><span class="hide-menu">Voucher</span>
+                                    </a>
+                                </li>
                             @endif
 
                         </ul>
@@ -194,22 +200,22 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/node_modules/jquery/jquery.min.js"></script>
+    <script src="{{asset('admin/assets/node_modules/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/node_modules/bootstrap/js/popper.min.js"></script>
-    <script src="assets/node_modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{asset('admin/assets/node_modules/bootstrap/js/popper.min.js')}}"></script>
+    <script src="{{asset('admin/assets/node_modules/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/perfect-scrollbar.jquery.min.js"></script>
+    <script src="{{asset('admin/js/perfect-scrollbar.jquery.min.js')}}"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="{{asset('admin/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="{{asset('admin/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
+    <script src="{{asset('admin/js/custom.min.js')}}"></script>
     <!-- google maps api -->
     <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>
-    <script src="assets/node_modules/gmaps/gmaps.min.js"></script>
-    <script src="assets/node_modules/gmaps/jquery.gmaps.js"></script>
+    <script src="{{asset('admin/assets/node_modules/gmaps/gmaps.min.js')}}"></script>
+    <script src="{{asset('admin/assets/node_modules/gmaps/jquery.gmaps.js')}}"></script>
     @yield('script')
 </body>
 

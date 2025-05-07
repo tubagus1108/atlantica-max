@@ -416,14 +416,22 @@
                                     <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Shop</a>
+                                    </li>
+
                                     <li class="{{ Request::is('redeem.index') ? 'active' : '' }}">
                                         <a href="{{ route('redeem.index') }}"><span
                                                 class="fa fa-shopping-cart"></span>Redeem Code</a>
                                     </li>
-                                    <!-- <li class="{{ Request::is('m-cash') ? 'active' : '' }}">
-                                        <a href="{{ route('m-cash') }}"><span
-                                                class="fa fa-shopping-cart"></span>M-Cash</a>
-                                    </li> -->
+
+                                    <li class="{{ Request::is('exchange.index') ? 'active' : '' }}">
+                                        <a href="{{ route('exchange.index') }}"><span
+                                                class="fa fa-exchange"></span>Exchange</a>
+                                    </li>
+
+                                    <li class="{{ Request::is('mshop') ? 'active' : '' }}">
+                                        <a href="{{ route('mshop') }}"><span
+                                                class="fa fa-shopping-cart"></span>M-Shop</a>
+                                    </li>
                                     {{-- <li class="{{ Request::is('person.index') ? 'active' : '' }}">
                                         <a href="{{ route('person.index') }}"><span
                                                 class="fa fa-user fa-w-14"></span>Create Person</a>

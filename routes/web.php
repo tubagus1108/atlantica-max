@@ -6,9 +6,11 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
+use App\Http\Controllers\ExchangeController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemMallController;
+use App\Http\Controllers\MShopController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RankingController;
@@ -88,6 +90,15 @@ Route::post('/redeem', [OtherFeatureController::class, 'redeem'])->name('redeem.
 
 Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
 Route::post('/voucher', [VoucherController::class, 'store'])->name('voucher.store');
+
+Route::get('/exchange', [ExchangeController::class, 'index'])->name('exchange.index');
+Route::post('/exchange', [ExchangeController::class, 'exchange'])->name('exchange.process');
+
+Route::prefix('mshop')->group(function () {
+    Route::get('', [MShopController::class, 'index'])->name('mshop');
+    Route::get('{category_id}', [MShopController::class, 'GetCategoryProductMshop']);
+    Route::post('/purchase', [MShopController::class, 'purchase'])->name('purchase-mshop');
+});
 
 Route::get('troubleshooting', [TroubleshootingController::class, 'index'])->name('troubleshooting');
 Route::middleware(['admin.check'])->group(function () {

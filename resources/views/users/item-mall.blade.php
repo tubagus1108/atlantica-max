@@ -60,6 +60,8 @@
                 </form>
             </div>
             @endforeach
+            <div class="nk-gap-2"></div>
+            <div class="nk-gap-6"></div>
         </div>
     </div>
 @endsection

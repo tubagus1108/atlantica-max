@@ -64,18 +64,24 @@ class NewsController extends Controller
         ]);
 
         // Cek apakah ada gambar baru yang diunggah
+        // if ($request->hasFile('image')) {
+        //     $request->validate([
+        //         'image' => 'image|mimes:jpeg,png,jpg,gif',
+        //     ]);
+
+        //     // Simpan gambar (upload) ke direktori yang sesuai
+        //     $imagePath = $request->file('image')->store('images', 'public');
+        // } else {
+        //     // Jika tidak ada gambar baru, gunakan gambar yang ada di database
+        //     $imagePath = $request->image;
+        // }
+
         if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'image|mimes:jpeg,png,jpg,gif',
-            ]);
-
-            // Simpan gambar (upload) ke direktori yang sesuai
-            $imagePath = $request->file('image')->store('images', 'public');
-        } else {
-            // Jika tidak ada gambar baru, gunakan gambar yang ada di database
-            $imagePath = $request->image;
+            $image = $request->file('image');
+            $imageVar = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/news'), $imageVar);
         }
-
+        dd($image);
         // Perbarui entitas News dan simpan ke database
         $news = News::find($request->id);
         $news->lang = $validatedData['lang'];

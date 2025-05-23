@@ -133,7 +133,8 @@
                 <div class="nk-contacts-right">
                     <div class="nk-navbar">
                         <ul class="nk-nav">
-                            <li><a href="" target="_blank"><span class="fab fa-facebook"></span></a></li>
+                            <li><a href="https://chat.whatsapp.com/LbbQcZq5e6vFRUIO8lUlcf" target="_blank"><span class="fab fa-whatsapp"></span></a></li>
+                            <li><a href="https://www.facebook.com/profile.php?id=61573532339989" target="_blank"><span class="fab fa-facebook"></span></a></li>
                             <li><a href="https://discord.gg/aolegacy" target="_blank"><span
                                         class="fab fa-discord"></span></a></li>
                         </ul>
@@ -246,10 +247,15 @@
 
                         @if (session()->has('user'))
                             <li class="nk-drop-item">
-                                <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
+                                <!-- <a href="#" class="text-success"><span class="fa fa-user fa-w-14"></span>
                                     {{ session('user')->ID }} &nbsp;&nbsp;<span
                                         class="fa fa-money-bill-alt fa-w-20"></span>
-                                    {{ number_format(session('user')->cash, 0, ',', ' ') }}</a>
+                                    {{ number_format(session('user')->cash, 0, ',', ' ') }}</a> -->
+                                    <a href="#" class="text-success">
+                                        ID: {{ session('user')->ID }} &nbsp;&nbsp;
+                                        CASH: {{ number_format(session('user')->cash, 0, ',', ' ') }} &nbsp;&nbsp;
+                                        M-CASH: {{ number_format(session('user')->bond, 0, ',', ' ') }}
+                                    </a>
                                 <ul class="dropdown">
                                     <li class="{{ Request::is('profile') ? 'active' : '' }}">
                                         <a href="{{ route('user.information') }}"><span
@@ -266,10 +272,22 @@
                                     <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Shop</a>
+                                    </li>
                                     <li class="{{ Request::is('item-mall') ? 'active' : '' }}">
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Redeem Code</a>
                                     </li>
+
+                                    <li class="{{ Request::is('exchange.index') ? 'active' : '' }}">
+                                        <a href="{{ route('exchange.index') }}"><span
+                                                class="fa fa-exchange"></span>Exchange</a>
+                                    </li>
+
+                                    <li class="{{ Request::is('mshop') ? 'active' : '' }}">
+                                        <a href="{{ route('mshop') }}"><span
+                                                class="fa fa-shopping-cart"></span>M-Shop</a>
+                                    </li>
+
                                     <!-- <li class="{{ Request::is('m-cash') ? 'active' : '' }}">
                                         <a href="{{ route('m-cash') }}"><span
                                                 class="fa fa-shopping-cart"></span>M-Cash</a>
@@ -393,13 +411,11 @@
                         </li> -->
                         @if (session()->has('user'))
                             <li class="nk-drop-item">
-                                <a class="text-success" href="#">
-                                    <span
-                                        class="fa fa-user-o"></span>&nbsp;{{ substr(session('user')->ID, 0, 6) }}
-                                    &nbsp;&nbsp;
-                                    <span
-                                        class="fa fa-money"></span>&nbsp;{{ number_format(session('user')->cash, 0, ',', ' ') }}
-                                </a>
+                                <a href="#" class="text-success">
+                                        ID: {{ session('user')['id'] }} &nbsp;&nbsp;
+                                        CASH: {{ number_format(session('user')['cash'], 0, ',', ' ') }} &nbsp;&nbsp;
+                                        M-CASH: {{ number_format(session('user')['bond'], 0, ',', ' ') }}
+                                    </a>
                                 <ul class="dropdown">
                                     <li class="{{ Request::is('profile') ? 'active' : '' }}">
                                         <a href="{{ route('user.information') }}"><span
@@ -417,12 +433,10 @@
                                         <a href="{{ route('item-mall') }}"><span
                                                 class="fa fa-shopping-cart"></span>Shop</a>
                                     </li>
-
                                     <li class="{{ Request::is('redeem.index') ? 'active' : '' }}">
                                         <a href="{{ route('redeem.index') }}"><span
                                                 class="fa fa-shopping-cart"></span>Redeem Code</a>
                                     </li>
-
                                     <li class="{{ Request::is('exchange.index') ? 'active' : '' }}">
                                         <a href="{{ route('exchange.index') }}"><span
                                                 class="fa fa-exchange"></span>Exchange</a>
@@ -432,14 +446,9 @@
                                         <a href="{{ route('mshop') }}"><span
                                                 class="fa fa-shopping-cart"></span>M-Shop</a>
                                     </li>
-                                    {{-- <li class="{{ Request::is('person.index') ? 'active' : '' }}">
-                                        <a href="{{ route('person.index') }}"><span
-                                                class="fa fa-user fa-w-14"></span>Create Person</a>
-                                    </li> --}}
-                                    @if (session('user')->MasterLevelValue > '104')
+                                    @if (isset($user) && $user->MasterLevelValue > 104)
                                         <li class="{{ Request::is('admin/news') ? 'active' : '' }}">
-                                            <a href="{{ route('admin.news') }}"><span
-                                                    class="fa fa-user fa-w-14"></span>Administration</a>
+                                            <a href="{{ route('admin.news') }}"><span class="fa fa-user fa-w-14"></span>Administration</a>
                                         </li>
                                     @endif
                                     <li class="">

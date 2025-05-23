@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \App\Http\Middleware\Localization::class,
+            \App\Http\Middleware\RefreshUserSession::class,
         ],
 
         'api' => [
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin.check' => \App\Http\Middleware\AdminCheck::class,
         'super_admin.check' => \App\Http\Middleware\CheckSuperAdmin::class,
+        'check.role' => \App\Http\Middleware\CheckRole::class,
     ];
 }

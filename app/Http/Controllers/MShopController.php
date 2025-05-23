@@ -12,21 +12,22 @@ class MShopController extends Controller
     {
         $data = DB::connection('atlantica')
             ->table('dbo.A_BOND')
-            ->select('itemid', 'name', 'price', 'image','img1','img2')
+            ->where('itemcount', '>=', 1)
+            ->select('itemid', 'name', 'price', 'image','img1','img2','desc1')
             ->get();
 
         return view('users.mshop', compact('data'));
     }
 
-    public function GetCategoryProduct($id)
+    public function GetCategoryProductMshop($id)
     {
         $data = DB::connection('atlantica')
             ->table('dbo.A_BOND')
-            ->where('id', $id)
-            ->select('itemid', 'name', 'price', 'image','img1','img2')
+            ->where('category', $id)
+            ->where('itemcount', '>=', 1) // memastikan itemcount >= 1
+            ->select('itemid', 'name', 'price', 'image', 'img1', 'img2', 'desc1')
             ->get();
 
-        // dd($data);
         return view('users.mshop', compact('data'));
     }
 
@@ -37,30 +38,30 @@ class MShopController extends Controller
 
             if (!$user) {
                 Session::flash('error', 'You must log in to make a purchase.');
-                return redirect()->route('item-mall');
+                return redirect()->route('mshop');
             }
 
             $productID = $request->input('product_id', 0);
             $productPrice = $request->input('product_price', 0); // not used directly
             $quantity = $request->input('quantity', 1);
-            $userId = $user->ID;
+            $userId = $user['id'];
 
             // Validasi jumlah
             $validQuantities = [1, 10, 100, 1000];
             if (!in_array($quantity, $validQuantities)) {
                 Session::flash('error', 'Invalid quantity!');
-                return redirect()->route('item-mall');
+                return redirect()->route('mshop');
             }
 
             // Ambil detail item
             $product = DB::connection('atlantica')
-                ->table('dbo.A_CASH')
+                ->table('dbo.A_BOND')
                 ->where('itemid', $productID)
                 ->first();
 
             if (!$product) {
                 Session::flash('error', 'Item not found.');
-                return redirect()->route('item-mall');
+                return redirect()->route('mshop');
             }
 
             $itemPrice = $product->price;
@@ -76,14 +77,14 @@ class MShopController extends Controller
 
             if (!$account) {
                 Session::flash('error', 'User not found.');
-                return redirect()->route('item-mall');
+                return redirect()->route('mshop');
             }
 
-            $userCash = $account->cash;
+            $userCash = $account->bond;
 
             if ($userCash < $totalPrice || $quantity > $itemCount) {
                 Session::flash('error', 'Cash balance is insufficient or item stock is not enough.');
-                return redirect()->route('item-mall');
+                return redirect()->route('mshop');
             }
 
             DB::beginTransaction();
@@ -94,7 +95,7 @@ class MShopController extends Controller
                 DB::connection('account')
                     ->table('dbo.tbl_Account')
                     ->where('ID', $userId)
-                    ->update(['cash' => $userCash - $totalPrice]);
+                    ->update(['bond' => $userCash - $totalPrice]);
 
                 // Simpan pembelian
                 DB::connection('atlantica')
@@ -108,7 +109,7 @@ class MShopController extends Controller
 
                 // Update stok item
                 DB::connection('atlantica')
-                    ->table('dbo.A_CASH')
+                    ->table('dbo.A_BOND')
                     ->where('itemid', $productID)
                     ->update(['itemcount' => $itemCount - $quantity]);
 
@@ -120,9 +121,9 @@ class MShopController extends Controller
                 Session::flash('error', 'Transaction failed: ' . $e->getMessage());
             }
 
-            return redirect()->route('item-mall');
+            return redirect()->route('mshop');
         }
 
-        return redirect()->route('item-mall');
+        return redirect()->route('mshop');
     }
 }

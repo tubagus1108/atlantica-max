@@ -14,8 +14,8 @@
                         <div class="nk-gap-2"></div>
 
                         @if (session()->has('user'))
-                            {{-- <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="{{ route('download') }}"> --}}
-                            <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="">
+                            {{-- <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="https://drive.google.com/file/d/1E69tr_5w_XThzGFxesn5jFef-EEQVGFa/view?usp=sharing"> --}}
+                            <a class="nk-btn nk-btn-lg nk-btn-color-main-1 link-effect-4" href="https://drive.google.com/file/d/1E69tr_5w_XThzGFxesn5jFef-EEQVGFa/view?usp=sharingkal">
                                 <span>Download the game</span>
                             </a>
                         @else

@@ -31,7 +31,7 @@ class NewsController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('image', function ($data) {
-                $image = asset('storage/' . $data->image);
+                $image = asset('assets/images/news' . $data->image);
                 return '<img src="' . $image . '" alt="Nama Alternatif" width="50%">';
             })
             ->addColumn('action', function ($data) {
@@ -81,14 +81,15 @@ class NewsController extends Controller
             $imageVar = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('assets/images/news'), $imageVar);
         }
-        dd($image);
+
+
         // Perbarui entitas News dan simpan ke database
         $news = News::find($request->id);
         $news->lang = $validatedData['lang'];
         $news->title = $validatedData['title'];
         $news->type = $validatedData['type'];
         $news->content = $validatedData['content'];
-        $news->image = $imagePath;
+        $news->image = $imageVar;
         $news->save();
 
         return redirect(route('admin.news'))->with('success', 'News edit successfully');

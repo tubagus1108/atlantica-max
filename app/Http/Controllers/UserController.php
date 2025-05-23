@@ -38,13 +38,15 @@ class UserController extends Controller
         }
 
         if ($request->session()->get('user')) {
-            $user = $request->session()->get('user');
-            if ($request->input('password_old') !== $user->passwd) {
+            $member = DB::connection('member')->table('dbo.GM_MEMBER')
+                ->where('user_id', $request->session()->get('user')['id'])
+                ->first();
+            if ($request->input('password_old') !== $member->passwd) {
                 return redirect()->back()->withErrors(['errors' => 'The old password is incorrect.']);
             }
 
             $gm_member = DB::connection('member')->table('dbo.GM_MEMBER')
-                ->where('user_id', $user->user_id)
+                ->where('user_id', $member->user_id)
                 ->update([
                     'passwd' => $request->input('password'),
                     'pwdmd5' => md5($request->input('password'))

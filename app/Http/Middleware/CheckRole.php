@@ -2,38 +2,41 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Session;
 
-class AdminCheck
+class CheckRole
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  string  $role
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $role)
     {
-        $user = Session::get('user');
+        $user = $request->session()->get('user');
 
         if (!$user) {
             return redirect(route('home.index'));
         }
+
+        // Memeriksa jika level role 120
         $check_role = DB::connection('account')->table('dbo.tbl_Account')
             ->where('ID', $user['id'])
-            ->where('MasterLevelValue', '>', 104)
+            ->where('MasterLevelValue', 120)
             ->where('MasterLevelExpireTime', '>=', Carbon::now())
-            ->where('MasterLevel', '>', 104)
+            ->where('MasterLevel', 120)
             ->first();
 
         if ($check_role) {
             return $next($request);
-        } else {
-            return redirect()->route('home.index');
         }
+
+        return redirect(route('home.index'));
     }
 }

@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
-class ProductController extends Controller
+class ProductMshopController extends Controller
 {
     public function index()
     {
-        return view('admin.product.product');
+        return view('admin.mshop.mshop');
     }
 
     public function store(Request $request)
@@ -25,15 +25,13 @@ class ProductController extends Controller
 
         // Validasi form input
         $request->validate([
-            'category' => 'required',
             'itemid' => 'required',
             'name' => 'required',
+            'category' => 'required',
             'desc' => 'required',
             'desc1' => 'required',
             'desc2' => 'required',
             'desc3' => 'required',
-            'min_qty' => 'required|integer|min:1',
-            'max_qty' => 'required|integer|max:1000',
             'price' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
@@ -53,7 +51,7 @@ class ProductController extends Controller
             $imageFileName = $request->input('name') . '.' . $extension;
 
             // Path simpan
-            $destination = base_path('assets/images/itemmall/img_shop');
+            $destination = base_path('assets/images/itemmall/m_shop');
             $image->move($destination, $imageFileName);
         }
 
@@ -73,19 +71,18 @@ class ProductController extends Controller
             'desc1' => $request->input('desc1'),
             'desc2' => $request->input('desc2'),
             'desc3' => $request->input('desc3'),
-            'min_qty' => $request->input('min_qty'),
-            'max_qty' => $request->input('max_qty'),
+            'typeshop' => 'M-Shop'
         ];
-
         try {
             DB::connection('atlantica')->beginTransaction();
-            $inputData['id'] = DB::connection('atlantica')->table('dbo.A_CASH')->max('id') + 1;
-            DB::connection('atlantica')->table('dbo.A_CASH')->insert($inputData);
+            $inputData['id'] = DB::connection('atlantica')->table('dbo.A_BOND')->max('id') + 1;
+            DB::connection('atlantica')->table('dbo.A_BOND')->insert($inputData);
             DB::connection('atlantica')->commit();
 
-            Session::flash('success', 'Add Product successful.');
+            Session::flash('success', 'Add Product Mshop successful.');
             return redirect()->route('product.index');
         } catch (\Exception $e) {
+            dd($e);
             DB::connection('atlantica')->rollBack();
             return back()->with('error', 'Gagal menambahkan produk: ' . $e->getMessage());
         }

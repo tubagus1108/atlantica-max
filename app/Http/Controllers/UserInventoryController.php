@@ -32,7 +32,7 @@ class UserInventoryController extends Controller
         $account = DB::connection('account')
             ->table('tbl_Account')
             ->select('IDNum')
-            ->where('ID', $user->{'ID'})
+            ->where('ID', $user['id'])
             ->first();
 
         if (!$account) {

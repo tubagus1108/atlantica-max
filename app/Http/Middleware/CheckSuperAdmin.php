@@ -22,7 +22,7 @@ class CheckSuperAdmin
             return redirect(route('home.index'));
         }
         $check_role = DB::connection('account')->table('dbo.tbl_Account')
-            ->where('ID', $user->{'ID'})
+            ->where('ID', $user['id'])
             ->where('MasterLevelValue', 120)
             ->where('MasterLevelExpireTime', '>=', Carbon::now())
             ->where('MasterLevel', 120)

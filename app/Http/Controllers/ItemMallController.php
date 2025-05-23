@@ -13,7 +13,7 @@ class ItemMallController extends Controller
     {
         $data = DB::connection('atlantica')
             ->table('dbo.A_CASH')
-            ->select('itemid', 'name', 'price', 'image')
+            ->select('itemid', 'name', 'price', 'image','desc')
             ->get();
 
         return view('users.item-mall', compact('data'));
@@ -23,8 +23,8 @@ class ItemMallController extends Controller
     {
         $data = DB::connection('atlantica')
             ->table('dbo.A_CASH')
-            ->where('id', $id)
-            ->select('itemid', 'name', 'price', 'image')
+            ->where('category', $id)
+            ->select('itemid', 'name', 'price', 'image','desc')
             ->get();
 
         // dd($data);
@@ -44,7 +44,7 @@ class ItemMallController extends Controller
             $productID = $request->input('product_id', 0);
             $productPrice = $request->input('product_price', 0); // not used directly
             $quantity = $request->input('quantity', 1);
-            $userId = $user->ID;
+            $userId = $user['id'];
 
             // Validasi jumlah
             $validQuantities = [1, 10, 100, 1000];
@@ -90,35 +90,21 @@ class ItemMallController extends Controller
             DB::beginTransaction();
 
             try {
-                DB::connection('atlantica')->insert("EXEC NGM_BUY_INS @product_seq=?, @user_id=?, @get_id=?, @order_count=?, @order_price=?, @money_real=?, @money_bonus=?, @money_event=?, @tx_no=?, @comment=?, @reg_ip=?", [
-                    $productID,
-                    $userId,
-                    $userId,
-                    $quantity,
-                    $productPrice,
-                    0,
-                    0,
-                    0,
-                    'sale',
-                    'comment',
-                    '127.0.0.1',
-                ]);
-
                 // Update cash user
                 DB::connection('account')
                     ->table('dbo.tbl_Account')
                     ->where('ID', $userId)
                     ->update(['cash' => $userCash - $totalPrice]);
 
-                // // Simpan pembelian
-                // DB::connection('atlantica')
-                //     ->table('dbo.NGM_BUY_ITEM')
-                //     ->insert([
-                //         'user_id' => $userId,
-                //         'item_num' => $quantity,
-                //         'item_name' => $itemName,
-                //         'item_unique' => $productID,
-                //     ]);
+                // Simpan pembelian
+                DB::connection('atlantica')
+                    ->table('dbo.NGM_BUY_ITEM')
+                    ->insert([
+                        'user_id' => $userId,
+                        'item_num' => $quantity,
+                        'item_name' => $itemName,
+                        'item_unique' => $productID,
+                    ]);
 
                 // Update stok item
                 DB::connection('atlantica')
@@ -139,4 +125,6 @@ class ItemMallController extends Controller
 
         return redirect()->route('item-mall');
     }
+
+
 }

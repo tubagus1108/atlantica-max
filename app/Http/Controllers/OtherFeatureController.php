@@ -29,7 +29,7 @@ class OtherFeatureController extends Controller
             'code' => 'required|string'
         ]);
 
-        $userId = Session::get('user')->{'ID'}; // pastikan user sudah login dan ID tersedia
+        $userId = Session::get('user')['id']; // pastikan user sudah login dan ID tersedia
         $code = $request->input('code');
 
         $accountDb = DB::connection('account');

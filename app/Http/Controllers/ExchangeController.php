@@ -21,7 +21,7 @@ class ExchangeController extends Controller
             return redirect('/login');
         }
 
-        $user_id = Session::get('user')->{'ID'};
+        $user_id = Session::get('user')['id'];
 
         // Get IDNum from account database
         $account = DB::connection('account')
@@ -76,7 +76,7 @@ class ExchangeController extends Controller
             'bond_to_exchange' => 'required|integer|min:1',
         ]);
 
-        $user_id = Session::get('user')->{'ID'};
+        $user_id = Session::get('user')['id'];
         $person_id = $request->input('person_id');
         $bond_to_exchange = (int) $request->input('bond_to_exchange');
         // dd($request);

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+
 class CashController extends Controller
 {
     public function index()
@@ -16,31 +17,43 @@ class CashController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'user_id' => 'required',
-            'cash' => 'required',
+            'user_id' => 'required|numeric',
+            'cash' => 'required|numeric|min:1',
         ]);
 
-        $user = DB::connection('account')
+        // Ambil user yang sedang login dari session
+        $sessionUser = Session::get('user');
+
+        // Cek apakah user login dan memiliki akses admin (MasterLevelValue 120)
+        if (!$sessionUser || !isset($sessionUser['MasterLevelValue']) || $sessionUser['MasterLevelValue'] != 120) {
+            abort(403, 'Unauthorized access.');
+        }
+
+        // Ambil user target berdasarkan input user_id
+        $targetUser = DB::connection('account')
             ->table('dbo.tbl_Account')
             ->where('ID', $request->input('user_id'))
             ->first();
 
-        if ($user) {
-            // Update the 'cash' field with the new amount
-            $newCash = $user->cash + $request->input('cash');
+        if ($targetUser) {
+            $newCash = $targetUser->cash + $request->input('cash');
 
+            // Lakukan update cash
             DB::connection('account')
                 ->table('dbo.tbl_Account')
                 ->where('ID', $request->input('user_id'))
                 ->update(['cash' => $newCash]);
 
+            // Simpan log penambahan cash
             DB::connection('account')
                 ->table('dbo.redeem_log')
                 ->insert([
                     'user_id' => $request->input('user_id'),
-                    'cash_amount' => $newCash,
-                    'redeem_code' => 'CODEADMIN' . Str::upper(Str::random(6)), // contoh: CODEADMINABC123
+                    'cash_amount' => $request->input('cash'),
+                    'redeem_code' => 'CODEADMIN' . Str::upper(Str::random(6)),
+                    'created_at' => now(), // Jika tabel memiliki timestamp
                 ]);
 
             Session::flash('success', 'Send cash to user successful.');
@@ -50,54 +63,4 @@ class CashController extends Controller
 
         return redirect()->route('cash.index');
     }
-
-    public function store1(Request $request)
-    {
-        $validated = $request->validate([
-            'user_id' => 'required|integer',
-            'cash' => 'required|numeric',
-        ]);
-
-        $userId = $validated['user_id'];
-        $cashToAdd = $validated['cash'];
-
-        $accountConnection = DB::connection('account');
-
-        $user = $accountConnection
-            ->table('dbo.tbl_Account')
-            ->where('ID', $userId)
-            ->first();
-
-        if (!$user) {
-            Session::flash('error', 'User not found. Send cash failed.');
-            return redirect()->route('cash.index');
-        }
-
-        $newCash = $user->cash + $cashToAdd;
-
-        try {
-            $accountConnection->beginTransaction();
-
-            $accountConnection->table('dbo.tbl_Account')
-                ->where('ID', $userId)
-                ->update(['cash' => $newCash]);
-
-            $accountConnection->table('dbo.redeem_log')->insert([
-                'user_id' => $userId,
-                'cash' => $newCash,
-                'redeem_code' => 'CODEADMIN',
-                'created_at' => now(), // hanya jika kolom tersedia
-            ]);
-
-            $accountConnection->commit();
-
-            Session::flash('success', 'Send cash to user successful.');
-        } catch (\Exception $e) {
-            $accountConnection->rollBack();
-            Session::flash('error', 'An error occurred: ' . $e->getMessage());
-        }
-
-        return redirect()->route('cash.index');
-    }
-
 }

@@ -3,14 +3,13 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CashController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductMshopController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DownloadsController;
-use App\Http\Controllers\ExchangeController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemMallController;
-use App\Http\Controllers\MShopController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RankingController;
@@ -19,7 +18,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OtherFeatureController;
 use App\Http\Controllers\UserInventoryController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExchangeController;
+use App\Http\Controllers\MShopController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -101,8 +101,8 @@ Route::prefix('mshop')->group(function () {
 });
 
 Route::get('troubleshooting', [TroubleshootingController::class, 'index'])->name('troubleshooting');
-Route::middleware(['admin.check'])->group(function () {
-    Route::group(['prefix' => 'admin'], function () {
+Route::middleware(['check.role:120'])->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::get('news', [AdminController::class, 'newsIndex'])->name('admin.news');
         Route::post('news/store', [AdminController::class, 'store'])->name('news.store');
         Route::get('news/datatable', [NewsController::class, 'datatable_news'])->name('datatable.news');
@@ -110,17 +110,22 @@ Route::middleware(['admin.check'])->group(function () {
         Route::get('news/edit/{id}', [NewsController::class, 'editForm'])->name('ajax.news-edit');
         Route::post('news/edit/{id}', [NewsController::class, 'editFormPost'])->name('ajax.news-edit.post');
 
+        // Sekarang hanya user dengan MasterLevel 120 yang bisa akses
+        Route::get('product', [ProductController::class, 'index'])->name('product.index');
+        Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
 
+        Route::get('cash', [CashController::class, 'index'])->name('cash.index');
+        Route::post('cash/store', [CashController::class, 'store'])->name('cash.store');
 
-        Route::middleware(['super_admin.check'])->group(function () {
-            Route::get('product', [ProductController::class, 'index'])->name('product.index');
-            Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+        Route::post('/voucher', [VoucherController::class, 'store'])->name('voucher.store');
 
-            Route::get('cash', [CashController::class, 'index'])->name('cash.index');
-            Route::post('cash/store', [CashController::class, 'store'])->name('cash.store');
-        });
+         // Sekarang hanya user dengan MasterLevel 120 yang bisa akses
+        Route::get('product-mshop', [ProductMshopController::class, 'index'])->name('product-mshop.index');
+        Route::post('product-mshop/store', [ProductMshopController::class, 'store'])->name('product-mshop.store');
     });
 });
+
 // Route::middleware(['auth','web'])->group(function () {
 // });
 

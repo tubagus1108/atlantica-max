@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('bredcrum-title')
-    Product
+    M-Shop Product
 @endsection
 @section('bredcrum-menu')
-    Product
+M-Shop Product
 @endsection
 @section('content')
     <div class="row">
@@ -17,9 +17,10 @@
                         <div class="alert alert-success text-center">{{ session('success') }}</div>
                     @endif
 
-                    <h4 class="card-title">Product Created</h4>
-                    <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
+                    <h4 class="card-title">Product M Shop Created</h4>
+                    <form action="{{ route('product-mshop.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group">
                             <label for="category">Category :</label>
                             <select name="category" id="category" class="form-control">
@@ -65,7 +66,7 @@
                             <input type="text" name="desc3" id="desc3" class="form-control">
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="min_qty">Min Qty :</label>
                             <input type="number" name="min_qty" id="min_qty" class="form-control">
                         </div>
@@ -73,7 +74,7 @@
                         <div class="form-group">
                             <label for="max_qty">Max Qty :</label>
                             <input type="number" name="max_qty" id="max_qty" class="form-control">
-                        </div>
+                        </div> --}}
 <!--
                         <div class="form-group">
                             <label for="start-date">Start Date:</label>
